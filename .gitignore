@@ -1,5 +1,4 @@
 node_modules/
 *.swp
 .#*
-poloniex-keys.json
 package-lock.json
