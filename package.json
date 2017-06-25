@@ -4,7 +4,6 @@
   "main": "src/index.js",
   "scripts": {
     "test": "tape test/*.js",
-    "example": "node example/influx.js",
     "watch": "runwatch \"**/*.js\" -r \"npm test\""
   },
   "devDependencies": {
@@ -12,10 +11,5 @@
     "tape": "^4.5.1"
   },
   "dependencies": {
-    "influx": "^5.0.0-alpha.4",
-    "kefir": "^3.7.2",
-    "poloniex-unofficial": "^1.1.2",
-    "poloniex.js": "0.0.7",
-    "ws": "^3.0.0"
   }
 }
