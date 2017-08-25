@@ -29,10 +29,12 @@ CLOSED: [2017-08-25 Fri 14:07]
 *** Paginate
 *** Persist over restarts
 * Client specs
+** Maintain client state
+*** Connected (to server) boolean status
+*** My user
 ** Validates stuff on the client-side
 ** User pseudonym psersists
 # Load pseudonym from local storage, use to emit join message?
-** Maintain connected (to server) Boolean status
 ** Post, see pending message
 ** Set error state
 ** Maintain an ordered list of messages, updates real time
@@ -41,5 +43,6 @@ CLOSED: [2017-08-25 Fri 14:07]
 ** Multiple rooms?
 * Refactors
 ** Make validator export error messages - import them from the tests
-** More DRY websocket client routes
+** DONE More DRY websocket client routes
+CLOSED: [2017-08-25 Fri 14:13]
 ** Break out validation in server.js to validation.js

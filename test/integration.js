@@ -79,18 +79,18 @@ test('client can join room', t => {
       )
       login+=1
       // client should leave now
-      client.leave(function (res) {
+      client2.leave(function (res) {
         t.notOk(
           res,
-          'client can leave without errors'
+          'client2 can leave without errors'
         )
       })
 
     } else {
       t.deepEquals(
         online,
-        { 'eeee': '#eee' },
-        'login 2, post-logout, one users online (eeee)'
+        { 'ffff': '#fff' },
+        'login 2, post-logout, one users online (ffff)'
       )
     }
   })
