@@ -20,6 +20,7 @@ CLOSED: [2017-08-25 Fri 13:44]
 *** DONE Deliver new room to everyone whenever someone leaves
 CLOSED: [2017-08-25 Fri 14:07]
 ** Post messages
+*** Check poster has joined
 *** Check message ok
 *** Return errors
 *** Append to room log
@@ -27,23 +28,36 @@ CLOSED: [2017-08-25 Fri 14:07]
 *** Check id exists
 *** Remove from log
 ** Sync room messages to clients
-* Client specs
-** Maintain client state
-*** Connected (to server) boolean status
-*** My joined / left status
-*** Time-sorted list of messages
-**** Updates when new message posted
-*** Errors appear in the state
-** Validates stuff on the client-side
-*** Join attempts
-*** Post attempts
-** User pseudonym psersists
-# Load pseudonym from local storage, use to emit join message?
+* Client state specs
+** Connected (to server) boolean status
+** My joined / left status
+** Time-sorted list of messages
+*** Updates when new message posted
+*** Links in posts get broken out
+*** Links have an `image` property set to True if they are HTML embeddable
+** Error state
+*** Errors appear in some error-y state
+*** Errors clear when the source of the error disappears
+* UI specs
+** Display join view when not connected
+** Display room view when connected
+*** List of posts are there
+**** In the correct (time-sorted) order, newest at bottom
+**** Links to images get embedded below posts
+**** URLs become link-ified
+*** Post button is there
+*** Message input is there
+** Display error when there is one
 * Nice-to-haves
 ** Remember psuedonym with cookie
-** Multiple rooms?
+# Load pseudonym from local storage, use to emit join message?
+** Validate stuff on the client-side
+*** Join attempts with bad stuff shouldn't need server
+*** Post attempts
 * Refactors
 ** Make validator export error messages - import them from the tests
 ** DONE More DRY websocket client routes
 CLOSED: [2017-08-25 Fri 14:13]
 ** Break out validation in server.js to validation.js
+** Integration test could be more DRY
+** Integration test could be more concise
