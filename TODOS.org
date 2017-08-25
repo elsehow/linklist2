@@ -1,0 +1,9 @@
+* Core server specs
+** Login as pseudonym
+** Receive first page of room
+** Paginate back
+** Post messages
+** Persists over restarts
+* Nice-to-haves
+** Remember psuedonym with cookie
+** Multiple rooms?
