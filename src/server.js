@@ -48,6 +48,7 @@ function join (io, client, pseudo, hex, cb) {
   route(errorMsgs, serverCb, cb)
 }
 
+
 function leave (io, client, cb) {
   let errorMsgs = [
     validators.leave(client),
@@ -64,6 +65,11 @@ function leave (io, client, cb) {
 }
 
 
+function disconnect (io, client) {
+  if (client.online)
+    leave(io, client, () => {})
+}
+
 
 /*
   createServer method
@@ -76,15 +82,14 @@ function createServer (port) {
   const io = socket(serv)
 
   io.on('connection', client => {
-
     // console.log('client connected!')
     // client.on('disconnect', _ => {
     //   console.log('client disconnected!')
     // })
-
     // routes
     client.on('join', partial(join, io, client))
     client.on('leave', partial(leave, io, client))
+    client.on('disconnect', partial(disconnect, io, client))
 
   })
   serv.listen(port)

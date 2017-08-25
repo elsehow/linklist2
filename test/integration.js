@@ -11,6 +11,7 @@ const serverUrl = 'http://localhost:'+serverPort
 let ioServer = null
 let client = null
 let client2 = null
+let client3 = null
 
 
 test('can start server', t => {
@@ -30,7 +31,7 @@ test('can connect to server', t => {
 
 
 test('clients can join, leave rooms, receive online state', t => {
-  t.plan(12)
+  t.plan(14)
   let login = 0 // mutable login counter
 
   /*
@@ -93,11 +94,29 @@ test('clients can join, leave rooms, receive online state', t => {
         })
       })
 
-    } else {
+    } else if (login == 2){
       t.deepEquals(
         online,
         { 'ffff': '#fff' },
-        'login 2, post-logout, one users online (ffff)'
+        'login 2, post-logout, one user online (ffff)'
+      )
+      // try joining and disconnecting
+      client3 = linklist.createClient(serverUrl)
+      client3.join('aaaa', '#aaa', function (res) {})
+      login+=1
+    } else if (login == 3) {
+      t.deepEquals(
+        online,
+        { 'ffff': '#fff', 'aaaa': '#aaa' },
+        'login 3, post-login, two users online (ffff, aaaa)'
+      )
+      client3.close()
+      login+=1
+    } else if (login == 4) {
+      t.deepEquals(
+        online,
+        { 'ffff': '#fff' },
+        'login 4, post-close, one user online (ffff)'
       )
     }
   })
@@ -135,9 +154,9 @@ test('clients can join, leave rooms, receive online state', t => {
 
 })
 
-
 test.onFinish(_ => {
   ioServer.close()
   client.close()
   client2.close()
+  client3.close()
 })

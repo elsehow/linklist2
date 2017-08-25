@@ -81,6 +81,16 @@ test('color validator works', t => {
   t.end()
 })
 
-/*
-  Posts datastructure
-*/
+// test('message validator works', t => {
+//   t.notOk(true)
+//   t.end()
+// })
+
+// /*
+//   Messages datastore
+// */
+
+// test('can post/delete messages to message store', t => {
+//   t.notOk(true)
+//   t.end()
+// })

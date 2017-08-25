@@ -4,7 +4,7 @@ CLOSED: [2017-08-25 Fri 13:08]
 ** TODO Message
 * Server specs
 ** DONE Joinable room
-CLOSED: [2017-08-25 Fri 14:07]
+CLOSED: [2017-08-25 Fri 15:49]
 *** DONE Validate psuedonym server-side
 CLOSED: [2017-08-25 Fri 13:24]
 *** DONE Validate color server-side
@@ -19,7 +19,10 @@ CLOSED: [2017-08-25 Fri 13:51]
 CLOSED: [2017-08-25 Fri 13:44]
 *** DONE Deliver new room to everyone whenever someone leaves
 CLOSED: [2017-08-25 Fri 14:07]
+*** DONE Should leave() on .close() (disconnect)
+CLOSED: [2017-08-25 Fri 15:49]
 ** TODO Sync room messages to clients
+# investigate pouchDB
 *** TODO Syncable log
 *** TODO Unit-testable methods to add, remove
 ** Post messages
@@ -66,3 +69,5 @@ CLOSED: [2017-08-25 Fri 14:13]
 ** Break out validation in server.js to validation.js
 ** Integration test could be more DRY
 ** Integration test could be more concise
+** Config configures server /and/ client routes
+# Perhaps via templating the html
