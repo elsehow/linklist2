@@ -30,7 +30,7 @@ test('can connect to server', t => {
 
 
 test('clients can join, leave rooms, receive online state', t => {
-  t.plan(11)
+  t.plan(12)
   let login = 0 // mutable login counter
 
   /*
@@ -41,21 +41,21 @@ test('clients can join, leave rooms, receive online state', t => {
   client.join('', '#fff', function (res) {
     t.deepEquals(
       res,
-      'Pseuodnym must be between 1 and 24 characters'
+      linklist.validators.messages['PSEUDO_BAD_LENGTH']
     )
   })
   // join with bad color
   client.join('ffff', 'fff', function (res) {
     t.deepEquals(
       res,
-      'Not a valid hex color'
+      linklist.validators.messages['HEX_INVALID']
     )
   })
   // join with bad pseudo AND color
   client.join('', 'fff', function (res) {
     t.deepEquals(
       res,
-      'Pseuodnym must be between 1 and 24 characters'
+      linklist.validators.messages['PSEUDO_BAD_LENGTH']
     )
   })
 
@@ -84,6 +84,13 @@ test('clients can join, leave rooms, receive online state', t => {
           res,
           'client2 can leave without errors'
         )
+        client2.leave(function (res) {
+          t.deepEquals(
+            res,
+            linklist.validators.messages['LEAVE_HAVE_NOT_JOINED'],
+            'error when I leave if i have not joined'
+          )
+        })
       })
 
     } else {
@@ -105,7 +112,7 @@ test('clients can join, leave rooms, receive online state', t => {
   client.join('eeee', '#eee', function (res) {
     t.deepEquals(
       res,
-      'You have already joined',
+      linklist.validators.messages['JOIN_ALREADY_JOINED'],
       'cannot join now that im already joined!'
     )
   })
@@ -114,7 +121,7 @@ test('clients can join, leave rooms, receive online state', t => {
   client2.join('ffff', '#eee', function (res) {
     t.deepEquals(
       res,
-      'That pseudonym is already taken',
+      linklist.validators.messages['JOIN_PSEUDO_TAKEN'],
       'client2 cannot join with the same name as me!'
     )
   })

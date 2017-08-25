@@ -1,5 +1,15 @@
 const isHex = require('is-hex-color')
 
+const messages = {
+  'HEX_INVALID': 'Not a valid hex color',
+  'HEX_NOT_STRING': 'Hex color must be a string',
+  'PSEUDO_BAD_LENGTH': 'Pseuodnym must be between 1 and 24 characters',
+  'PSEDUO_NOT_STRING': 'Pseudonym must be a string',
+  'JOIN_ALREADY_JOINED': 'You have already joined the room',
+  'JOIN_PSEUDO_TAKEN': 'That pseudonym is already taken in this room',
+  'LEAVE_HAVE_NOT_JOINED': 'You cannot leave if you have not joined',
+}
+
 // List[[Boolean, String]] -> Union[Boolean, String]
 function validate (checks) {
   for (check of checks) {
@@ -15,11 +25,11 @@ function pseudonym (p) {
   const checks = [
     [
       typeof(p) !== 'string',
-      'Pseudonym must be a string',
+      messages['PSEUDO_NOT_STRING']
     ],
     [
       (p.length < 1 || p.length > 24),
-      'Pseuodnym must be between 1 and 24 characters',
+      messages['PSEUDO_BAD_LENGTH']
     ],
   ]
   return validate(checks)
@@ -30,18 +40,46 @@ function hexColor (p) {
   const checks = [
     [
       typeof(p) !== 'string',
-      'Hex color must be a string'
+      messages['HEX_NOT_STRING']
     ],
     [
       !isHex(p),
-      'Not a valid hex color'
+      messages['HEX_INVALID']
     ]
   ]
   return validate(checks)
 }
 
+// SocketClient, Object[String->String], String -> Union[Boolean, String]
+function join (socketClient, onlineMap, pseudo) {
+  const checks = [
+    [
+      socketClient.online,
+      messages['JOIN_ALREADY_JOINED']
+    ],
+    [
+      onlineMap[pseudo],
+      messages['JOIN_PSEUDO_TAKEN']
+    ],
+  ]
+  return validate(checks)
+}
+
+// SocketClient -> Union[Boolean, String]
+function leave (socketClient) {
+  const checks = [
+    [
+      !socketClient.online,
+      messages['LEAVE_HAVE_NOT_JOINED']
+    ]
+  ]
+  return validate(checks)
+}
 
 module.exports = {
   pseudonym: pseudonym,
-  hexColor: hexColor
+  hexColor: hexColor,
+  messages: messages,
+  join: join,
+  leave: leave,
 }

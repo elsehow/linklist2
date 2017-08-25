@@ -1,7 +1,7 @@
 /*
   Unit tests
 */
-// require('./unit')
+require('./unit')
 
 
 /*

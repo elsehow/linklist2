@@ -5,7 +5,6 @@ const validators = require('..').validators
   Validators
 */
 
-
 test('psuedonym validator works', t => {
   t.deepEquals(
     validators.pseudonym('myname'),
@@ -14,26 +13,27 @@ test('psuedonym validator works', t => {
   )
   t.deepEquals(
     validators.pseudonym(6),
-    'Pseudonym must be a string',
+    validators.messages['PSEUDO_NOT_STRING'],
     '6 is not ok'
   )
   t.deepEquals(
     validators.pseudonym(['myname']),
-    'Pseudonym must be a string',
+    validators.messages['PSEUDO_NOT_STRING'],
     '[myname] is not ok',
   )
   t.deepEquals(
     validators.pseudonym(''),
-    'Psueodnym must be between 1 and 24 characters',
+    validators.messages['PSEUDO_BAD_LENGTH'],
     "'' is not ok"
   )
   t.deepEquals(
     validators.pseudonym('my realy really long pseudonym gosh'),
-    'Psueodnym must be between 1 and 24 characters',
+    validators.messages['PSEUDO_BAD_LENGTH'],
     "'my realy really long pseudonym gosh' is not ok"
   )
   t.end()
 })
+
 
 test('color validator works', t => {
   // valid examples
@@ -55,28 +55,32 @@ test('color validator works', t => {
   )
   t.deepEquals(
     validators.hexColor('sup'),
-    'Not a valid hex color',
+    validators.messages['HEX_INVALID'],
     "'sup' is not a color"
   )
   t.deepEquals(
     validators.hexColor("eee"),
-    'Not a valid hex color',
+    validators.messages['HEX_INVALID'],
     "'eee' is not a color"
   )
   // non-strings
   t.deepEquals(
     validators.hexColor(2323),
-    'Hex color must be a string',
+    validators.messages['HEX_NOT_STRING'],
   )
   t.deepEquals(
     validators.hexColor(["#333"]),
-    'Hex color must be a string',
+    validators.messages['HEX_NOT_STRING'],
     "['#333'] is not a color"
   )
   t.deepEquals(
     validators.hexColor(["#333", "#433"]),
-    'Hex color must be a string',
+    validators.messages['HEX_NOT_STRING'],
     "['#333', '#433'] is not a color"
   )
   t.end()
 })
+
+/*
+  Posts datastructure
+*/

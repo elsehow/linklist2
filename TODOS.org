@@ -1,7 +1,7 @@
 * Validators
-*** DONE Psuedoynm and color
+** DONE Psuedoynm and color
 CLOSED: [2017-08-25 Fri 13:08]
-*** TODO Message
+** TODO Message
 * Server specs
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 14:07]
@@ -19,6 +19,9 @@ CLOSED: [2017-08-25 Fri 13:51]
 CLOSED: [2017-08-25 Fri 13:44]
 *** DONE Deliver new room to everyone whenever someone leaves
 CLOSED: [2017-08-25 Fri 14:07]
+** TODO Sync room messages to clients
+*** TODO Syncable log
+*** TODO Unit-testable methods to add, remove
 ** Post messages
 *** Check poster has joined
 *** Check message ok
@@ -27,7 +30,6 @@ CLOSED: [2017-08-25 Fri 14:07]
 ** Delete messages
 *** Check id exists
 *** Remove from log
-** Sync room messages to clients
 * Client state specs
 ** Connected (to server) boolean status
 ** My joined / left status
@@ -45,6 +47,9 @@ CLOSED: [2017-08-25 Fri 14:07]
 **** In the correct (time-sorted) order, newest at bottom
 **** Links to images get embedded below posts
 **** URLs become link-ified
+**** Times appear next to messages
+**** Usernames appear next to messages
+**** A bar with the user's color appears next to messages
 *** Post button is there
 *** Message input is there
 ** Display error when there is one

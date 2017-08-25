@@ -1,5 +1,3 @@
-
-
 const validators = require('./validators')
 const socket = require('socket.io')
 
@@ -47,8 +45,7 @@ function createServer (port) {
       let errorMsgs = [
         validators.pseudonym(pseudo),
         validators.hexColor(hex),
-        client.online ? 'You have already joined' : false,
-        online[pseudo] ? 'That pseudonym is already taken' : false,
+        validators.join(client, online, pseudo)
       ]
       function serverCb () {
         // set their pseudonym in socket
@@ -67,7 +64,7 @@ function createServer (port) {
     */
     client.on('leave', cb => {
       let errorMsgs = [
-        !client.online ? 'You cannot leave if you have not joined' : false,
+        validators.leave(client),
       ]
       function serverCb () {
         // mark user no longer online
