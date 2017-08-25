@@ -1,5 +1,6 @@
 const validators = require('./validators')
 const socket = require('socket.io')
+const partial = require('lodash.partial')
 
 
 function route (errorMsgs, serverCb, clientCb) {
@@ -24,6 +25,51 @@ function route (errorMsgs, serverCb, clientCb) {
 // mutable application state
 let online = {}
 
+
+/*
+  Route methods
+  */
+
+function join (io, client, pseudo, hex, cb) {
+  let errorMsgs = [
+    validators.pseudonym(pseudo),
+    validators.hexColor(hex),
+    validators.join(client, online, pseudo)
+  ]
+  function serverCb () {
+    // set their pseudonym in socket
+    client.pseudo = pseudo
+    // mark user as online
+    client.online = true
+    online[pseudo] = hex
+    // give everyone the new list of people online
+    io.emit('online', online)
+  }
+  route(errorMsgs, serverCb, cb)
+}
+
+function leave (io, client, cb) {
+  let errorMsgs = [
+    validators.leave(client),
+  ]
+  function serverCb () {
+    // mark user no longer online
+    client.online = false
+    // remove client from online list
+    delete online[client.pseudo]
+    // give everyone the new list of people online
+    io.emit('online', online)
+  }
+  route(errorMsgs, serverCb, cb)
+}
+
+
+
+/*
+  createServer method
+  This gets exposed to callers.
+  */
+
 function createServer (port) {
 
   const serv = require('http').createServer();
@@ -31,51 +77,14 @@ function createServer (port) {
 
   io.on('connection', client => {
 
-    console.log('client connected!')
+    // console.log('client connected!')
+    // client.on('disconnect', _ => {
+    //   console.log('client disconnected!')
+    // })
 
-    client.on('disconnect', _ => {
-      console.log('client disconnected!')
-    })
-
-    /*
-      User joining
-      */
-
-    client.on('join', (pseudo, hex, cb) => {
-      let errorMsgs = [
-        validators.pseudonym(pseudo),
-        validators.hexColor(hex),
-        validators.join(client, online, pseudo)
-      ]
-      function serverCb () {
-        // set their pseudonym in socket
-        client.pseudo = pseudo
-        // mark user as online
-        client.online = true
-        online[pseudo] = hex
-        // give everyone the new list of people online
-        io.emit('online', online)
-      }
-      route(errorMsgs, serverCb, cb)
-    })
-
-    /*
-      User leaving
-    */
-    client.on('leave', cb => {
-      let errorMsgs = [
-        validators.leave(client),
-      ]
-      function serverCb () {
-        // mark user no longer online
-        client.online = false
-        // remove client from online list
-        delete online[client.pseudo]
-        // give everyone the new list of people online
-        io.emit('online', online)
-      }
-      route(errorMsgs, serverCb, cb)
-    })
+    // routes
+    client.on('join', partial(join, io, client))
+    client.on('leave', partial(leave, io, client))
 
   })
   serv.listen(port)

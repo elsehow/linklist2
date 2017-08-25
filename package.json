@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "is-hex-color": "0.0.1",
+    "lodash.partial": "^4.2.1",
     "socket.io": "^2.0.3"
   }
 }
