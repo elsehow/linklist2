@@ -1,7 +1,9 @@
-* Validators
+* DONE Validators
+CLOSED: [2017-08-25 Fri 15:56]
 ** DONE Psuedoynm and color
 CLOSED: [2017-08-25 Fri 13:08]
-** TODO Message
+** DONE Message
+CLOSED: [2017-08-25 Fri 15:56]
 * Server specs
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]

@@ -8,6 +8,9 @@ const messages = {
   'JOIN_ALREADY_JOINED': 'You have already joined the room',
   'JOIN_PSEUDO_TAKEN': 'That pseudonym is already taken in this room',
   'LEAVE_HAVE_NOT_JOINED': 'You cannot leave if you have not joined',
+  'MESSAGE_CANNOT_BE_EMPTY': 'Cannot send an empty message',
+  'MESSAGE_TOO_LONG': 'Message must be fewer than 1000 characters',
+  'MESSAGE_NOT_STRING': 'Messages must be a string',
 }
 
 // List[[Boolean, String]] -> Union[Boolean, String]
@@ -76,10 +79,29 @@ function leave (socketClient) {
   return validate(checks)
 }
 
+function message (m) {
+  const checks = [
+    [
+      !typeof(m) === 'string',
+      messages['MESSAGE_NOT_STRING'],
+    ],
+    [
+      m.length == 0,
+      messages['MESSAGE_CANNOT_BE_EMPTY']
+    ],
+    [
+      m.length > 1000,
+      messages['MESSAGE_TOO_LONG']
+    ],
+  ]
+  return validate(checks)
+}
+
 module.exports = {
   pseudonym: pseudonym,
   hexColor: hexColor,
   messages: messages,
   join: join,
   leave: leave,
+  message: message,
 }

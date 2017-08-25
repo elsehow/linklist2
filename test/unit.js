@@ -63,6 +63,11 @@ test('color validator works', t => {
     validators.messages['HEX_INVALID'],
     "'eee' is not a color"
   )
+  t.deepEquals(
+    validators.hexColor("#ggg"),
+    validators.messages['HEX_INVALID'],
+    "'#ggg' is not a color"
+  )
   // non-strings
   t.deepEquals(
     validators.hexColor(2323),
@@ -81,10 +86,17 @@ test('color validator works', t => {
   t.end()
 })
 
-// test('message validator works', t => {
-//   t.notOk(true)
-//   t.end()
-// })
+test('message validator works', t => {
+  t.deepEqual(
+    validators.message(''),
+    validators.messages['MESSAGE_CANNOT_BE_EMPTY'],
+  )
+  t.deepEqual(
+    validators.message(Array(1002).join(',')),
+    validators.messages['MESSAGE_TOO_LONG'],
+  )
+  t.end()
+})
 
 // /*
 //   Messages datastore
