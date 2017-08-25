@@ -20,24 +20,25 @@ CLOSED: [2017-08-25 Fri 13:44]
 *** DONE Deliver new room to everyone whenever someone leaves
 CLOSED: [2017-08-25 Fri 14:07]
 ** Post messages
-*** Validate message
+*** Check message ok
 *** Return errors
 *** Append to room log
-** Persist room state
-*** Deliver new messages to all clients
-*** Deliver first page
-*** Paginate
-*** Persist over restarts
+** Delete messages
+*** Check id exists
+*** Remove from log
+** Sync room messages to clients
 * Client specs
 ** Maintain client state
 *** Connected (to server) boolean status
-*** My user
+*** My joined / left status
+*** Time-sorted list of messages
+**** Updates when new message posted
+*** Errors appear in the state
 ** Validates stuff on the client-side
+*** Join attempts
+*** Post attempts
 ** User pseudonym psersists
 # Load pseudonym from local storage, use to emit join message?
-** Post, see pending message
-** Set error state
-** Maintain an ordered list of messages, updates real time
 * Nice-to-haves
 ** Remember psuedonym with cookie
 ** Multiple rooms?

@@ -29,7 +29,7 @@ test('can connect to server', t => {
 })
 
 
-test('client can join room', t => {
+test('clients can join, leave rooms, receive online state', t => {
   t.plan(11)
   let login = 0 // mutable login counter
 
