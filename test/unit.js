@@ -98,11 +98,3 @@ test('message validator works', t => {
   t.end()
 })
 
-// /*
-//   Messages datastore
-// */
-
-// test('can post/delete messages to message store', t => {
-//   t.notOk(true)
-//   t.end()
-// })

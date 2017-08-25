@@ -11,6 +11,7 @@ const messages = {
   'MESSAGE_CANNOT_BE_EMPTY': 'Cannot send an empty message',
   'MESSAGE_TOO_LONG': 'Message must be fewer than 1000 characters',
   'MESSAGE_NOT_STRING': 'Messages must be a string',
+  'MESSAGE_TIMESTAMP_NOT_NUMBER': 'Message timestamp must be a number',
 }
 
 // List[[Boolean, String]] -> Union[Boolean, String]
@@ -25,7 +26,7 @@ function validate (checks) {
 
 // String -> Union[Boolean, String]
 function pseudonym (p) {
-  const checks = [
+  return validate([
     [
       typeof(p) !== 'string',
       messages['PSEUDO_NOT_STRING']
@@ -34,13 +35,12 @@ function pseudonym (p) {
       (p.length < 1 || p.length > 24),
       messages['PSEUDO_BAD_LENGTH']
     ],
-  ]
-  return validate(checks)
+  ])
 }
 
 // String -> Union[Boolean, String]
 function hexColor (p) {
-  const checks = [
+  return validate([
     [
       typeof(p) !== 'string',
       messages['HEX_NOT_STRING']
@@ -49,13 +49,12 @@ function hexColor (p) {
       !isHex(p),
       messages['HEX_INVALID']
     ]
-  ]
-  return validate(checks)
+  ])
 }
 
 // SocketClient, Object[String->String], String -> Union[Boolean, String]
 function join (socketClient, onlineMap, pseudo) {
-  const checks = [
+  return validate([
     [
       socketClient.online,
       messages['JOIN_ALREADY_JOINED']
@@ -64,26 +63,32 @@ function join (socketClient, onlineMap, pseudo) {
       onlineMap[pseudo],
       messages['JOIN_PSEUDO_TAKEN']
     ],
-  ]
-  return validate(checks)
+  ])
 }
 
 // SocketClient -> Union[Boolean, String]
 function leave (socketClient) {
-  const checks = [
+  return validate([
     [
       !socketClient.online,
       messages['LEAVE_HAVE_NOT_JOINED']
     ]
-  ]
-  return validate(checks)
+  ])
 }
 
 function message (m) {
-  const checks = [
+  return validate([
     [
-      !typeof(m) === 'string',
+      !typeof(m.message) === 'string',
       messages['MESSAGE_NOT_STRING'],
+    ],
+    [
+      !typeof(m.pseudonym) === 'string',
+      messages['PSEUDO_NOT_STRING'],
+    ],
+    [
+      !typeof(m.timestamp) === 'number',
+      messages['MESSAGE_TIMESTAMP_NOT_NUMBER'],
     ],
     [
       m.length == 0,
@@ -93,8 +98,7 @@ function message (m) {
       m.length > 1000,
       messages['MESSAGE_TOO_LONG']
     ],
-  ]
-  return validate(checks)
+  ])
 }
 
 module.exports = {

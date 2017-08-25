@@ -9,6 +9,6 @@ clone this repository, then
 
 now you can edit js files in src/ and test/ - tests will automatically re-run
 
-## todo
+to start a server, easiest thing is
 
-development priorities here
+    pouchdb-server --port 5984

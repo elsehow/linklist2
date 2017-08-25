@@ -32,9 +32,6 @@ CLOSED: [2017-08-25 Fri 15:49]
 *** Check message ok
 *** Return errors
 *** Append to room log
-** Delete messages
-*** Check id exists
-*** Remove from log
 * Client state specs
 ** Connected (to server) boolean status
 ** My joined / left status
@@ -64,6 +61,7 @@ CLOSED: [2017-08-25 Fri 15:49]
 ** Validate stuff on the client-side
 *** Join attempts with bad stuff shouldn't need server
 *** Post attempts
+** Can't replicate from remote unless joined room
 * Refactors
 ** Make validator export error messages - import them from the tests
 ** DONE More DRY websocket client routes

@@ -1,10 +1,3 @@
-/*
-  Unit tests
-*/
-require('./unit')
-
-
-/*
-  Integration tests
-  */
-require('./integration')
+// require('./unit')
+// require('./integration')
+require('./messageStore')
