@@ -1,3 +1,3 @@
-require('./unit')
-// require('./integration')
+// require('./validators')
+require('./integration')
 // require('./messageStore')

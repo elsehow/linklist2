@@ -32,7 +32,8 @@ CLOSED: [2017-08-25 Fri 16:53]
 CLOSED: [2017-08-25 Fri 16:53]
 *** DONE Unit testable methods to sync
 CLOSED: [2017-08-25 Fri 16:53]
-** Post messages
+** TODO Post messages
+# POST ROUTE
 *** Check poster has joined
 *** Check message ok
 *** Return errors
@@ -63,6 +64,8 @@ CLOSED: [2017-08-25 Fri 16:53]
 * Nice-to-haves
 ** Remember psuedonym with cookie
 # Load pseudonym from local storage, use to emit join message?
+** Return errors from server `db.post` call
+** Performance tricks on pathological #s of posts
 ** Validate stuff on the client-side
 *** Join attempts with bad stuff shouldn't need server
 *** Post attempts

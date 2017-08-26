@@ -13,15 +13,17 @@ let clientSync = null
 */
 const messageStore = require('..').messageStore
 
+const exampleMessage = {
+  pseudo: 'ffff',
+  timestamp: moment().unix(),
+  message: 'sup'
+}
+
 test('can create a server message store', t => {
   serverDb = messageStore.createServerMessageStore(serverDbPath)
   t.ok(serverDb)
-  t.ok(serverDb.postMessage)
-  serverDb.postMessage(
-    'ffff',
-    moment().unix(),
-    'sup'
-  )
+  t.ok(serverDb.post)
+  serverDb.post(exampleMessage)
     .catch(err => {
       t.notOk(err)
       t.end()
@@ -73,11 +75,8 @@ test('posts are synced!', t => {
       )
       t.end()
     })
-  serverDb.postMessage(
-    'ffff',
-    moment().unix(),
-    'cool post'
-  )
+  exampleMessage.message = 'cool post'
+  serverDb.post(exampleMessage)
 })
 
 test.onFinish(_ => {

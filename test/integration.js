@@ -7,6 +7,8 @@ const linklist = require('..')
 // test config
 const serverPort = 3000
 const serverUrl = 'http://localhost:'+serverPort
+const serverDbPath = 'http://localhost:5984/theirDb'
+const localDbName = 'testerdb'
 // we will assign these refs later
 let ioServer = null
 let client = null
@@ -15,14 +17,14 @@ let client3 = null
 
 
 test('can start server', t => {
-  ioServer = linklist.createServer(serverPort)
+  ioServer = linklist.createServer(serverPort, serverDbPath)
   t.ok(ioServer)
   t.end()
 })
 
 
 test('can connect to server', t => {
-  client = linklist.createClient(serverUrl)
+  client = linklist.createClient(serverUrl, localDbName, serverDbPath)
   client.on('connect', function () {
     t.ok(true, 'connected to server')
     t.end()
@@ -101,7 +103,7 @@ test('clients can join, leave rooms, receive online state', t => {
         'login 2, post-logout, one user online (ffff)'
       )
       // try joining and disconnecting
-      client3 = linklist.createClient(serverUrl)
+      client3 = linklist.createClient(serverUrl, localDbName+'3', serverDbPath)
       client3.join('aaaa', '#aaa', function (res) {})
       login+=1
     } else if (login == 3) {
@@ -136,7 +138,7 @@ test('clients can join, leave rooms, receive online state', t => {
     )
   })
 
-  client2 = linklist.createClient(serverUrl)
+  client2 = linklist.createClient(serverUrl, localDbName+'2', serverDbPath)
   client2.join('ffff', '#eee', function (res) {
     t.deepEquals(
       res,
@@ -151,12 +153,31 @@ test('clients can join, leave rooms, receive online state', t => {
       'client2 can join with a differnet username, no errors'
     )
   })
+})
+
+test('client can post, receive message from db', t => {
+  t.ok(client.store.sync)
+  t.ok(client.store.db)
+  t.ok(client.post)
+  client.post(function () { console.log('bad')}, function (res) {
+    // should error, sending a non-string
+    t.ok(res, res)
+    // this should be fine
+    client.post('Hello sweet world', function (res) {
+      t.notOk(res)
+      t.end()
+    })
+  })
 
 })
 
 test.onFinish(_ => {
-  ioServer.close()
-  client.close()
-  client2.close()
-  client3.close()
+  ioServer.db.destroy()
+  client.store.db.destroy()
+  client2.store.db.destroy()
+  client3.store.db.destroy()
+  ioServer.stop()
+  client.stop()
+  client2.stop()
+  client3.stop()
 })

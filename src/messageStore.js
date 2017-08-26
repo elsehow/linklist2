@@ -20,14 +20,6 @@ function createClientMessageStore (name, remoteHost) {
 
 function createServerMessageStore (name) {
   const db = new PouchDB(name)
-  function postMessage (pseudo, timestamp, message) {
-    return db.post({
-      pseudo: pseudo,
-      message: message,
-      timestamp: timestamp,
-    })
-  }
-  db.postMessage = postMessage
   return db
 }
 

@@ -1,15 +1,15 @@
 const validators = require('./validators')
 const socket = require('socket.io')
 const partial = require('lodash.partial')
+const messageStore = require('./messageStore')
+const moment = require('moment')
 
 
 function route (errorMsgs, serverCb, clientCb) {
   for (errorMessage of errorMsgs) {
     // if there's an error message,
     if (errorMessage) {
-      // call the client's cb on it
-      clientCb(errorMessage)
-      // exit the method
+      clientCb(errorMessage.toString())
       return
     }
   }
@@ -71,15 +71,32 @@ function disconnect (io, client) {
 }
 
 
+function post (io, client, db, messageBody, cb) {
+  let message = {
+    pseudo: client.pseudo,
+    timestamp: moment().unix(),
+    message: messageBody,
+  }
+  let errorMsgs = [
+    validators.message(message)
+  ]
+  function serverCb () {
+    db.post(message)
+  }
+  route(errorMsgs, serverCb, cb)
+}
+
+
 /*
   createServer method
   This gets exposed to callers.
   */
 
-function createServer (port) {
+function createServer (port, dbHost) {
 
   const serv = require('http').createServer();
   const io = socket(serv)
+  const db = messageStore.createServerMessageStore(dbHost)
 
   io.on('connection', client => {
     // console.log('client connected!')
@@ -90,10 +107,18 @@ function createServer (port) {
     client.on('join', partial(join, io, client))
     client.on('leave', partial(leave, io, client))
     client.on('disconnect', partial(disconnect, io, client))
+    client.on('post', partial(post, io, client, db))
 
   })
-  serv.listen(port)
 
+  serv.db = db
+
+  serv.stop = function () {
+    serv.close()
+    serv.db.close()
+  }
+
+  serv.listen(port)
   return serv
 }
 
