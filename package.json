@@ -15,6 +15,7 @@
   "dependencies": {
     "is-hex-color": "0.0.1",
     "lodash.partial": "^4.2.1",
+    "minidux": "^1.0.1",
     "moment": "^2.18.1",
     "pouchdb": "^6.3.4",
     "socket.io": "^2.0.3"

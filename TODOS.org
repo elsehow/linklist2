@@ -4,7 +4,7 @@ CLOSED: [2017-08-25 Fri 15:56]
 CLOSED: [2017-08-25 Fri 13:08]
 ** DONE Message
 CLOSED: [2017-08-25 Fri 15:56]
-* DONE Server specs
+* DONE Client/Server specs
 CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]
@@ -45,6 +45,10 @@ CLOSED: [2017-08-26 Sat 14:41]
 *** DONE Check poster has joined
 CLOSED: [2017-08-26 Sat 14:41]
 * Client state specs
+# stateReducer.js
+# Minidux should be good
+** DONE Replace cb with error event
+CLOSED: [2017-08-26 Sat 15:45]
 ** Connected (to server) boolean status
 ** My joined / left status
 ** Time-sorted list of messages
@@ -55,6 +59,7 @@ CLOSED: [2017-08-26 Sat 14:41]
 *** Errors appear in some error-y state
 *** Errors clear when the source of the error disappears
 * UI specs
+# webapp.js
 ** Display join view when not connected
 ** Display room view when connected
 *** List of posts are there
@@ -68,11 +73,22 @@ CLOSED: [2017-08-26 Sat 14:41]
 *** Message input is there
 ** Display error when there is one
 * Nice-to-haves
+** Unread status
+*** Thicker bar on unread messages
+** Favicon
+*** Online
+*** Offline
+*** Online & unread messages
+** Embeddables
+*** Images
+*** Youtube videos
+*** Soundcloud
 ** Remember psuedonym with cookie
 # Load pseudonym from local storage, use to emit join message?
 ** Return errors from server `db.post` call
 ** Performance tricks on pathological #s of posts
 ** Validate stuff on the client-side
+# minidux can do this with createStore(reuder, initial, *enhancer*)
 *** Join attempts with bad stuff shouldn't need server
 *** Post attempts
 ** Can't replicate from remote unless joined room
