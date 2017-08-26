@@ -156,19 +156,45 @@ test('clients can join, leave rooms, receive online state', t => {
 })
 
 test('client can post, receive message from db', t => {
+
+  // necessary ingredients exists
   t.ok(client.store.sync)
   t.ok(client.store.db)
   t.ok(client.post)
+
+  // receive message
+  client.store.sync.on('change', change => {
+    t.deepEquals(
+      change.docs[0].pseudo,
+      'ffff'
+    )
+    t.deepEquals(
+      change.docs[0].message,
+      'Hello sweet world'
+    )
+    t.end()
+  })
+
+  // post message
   client.post(function () { console.log('bad')}, function (res) {
     // should error, sending a non-string
     t.ok(res, res)
     // this should be fine
     client.post('Hello sweet world', function (res) {
       t.notOk(res)
-      t.end()
     })
   })
 
+})
+
+test('client who has not joined cannot post', t => {
+  client2.post('hax', function (res) {
+    t.deepEqual(
+      res,
+      linklist.validators.messages['POSTACTION_SENDER_NOT_JOINED']
+    )
+    t.end()
+  })
 })
 
 test.onFinish(_ => {

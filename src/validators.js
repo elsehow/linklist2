@@ -20,6 +20,7 @@ const messages = {
   'MESSAGE_MUST_HAVE_MESSAGE': 'Message must have a `message` field',
   'MESSAGE_MUST_HAVE_PSEUDO': 'Message must have a `pseudo` field',
   'MESSAGE_MUST_HAVE_TIMESTAMP': 'Message must have a `timestamp` field',
+  'POSTACTION_SENDER_NOT_JOINED': 'Must join room to send a message',
 }
 
 // List[[Boolean, String]] -> Union[Boolean, String]
@@ -125,6 +126,15 @@ function message (m) {
   }
 }
 
+function postAction (pseudo, onlineMap) {
+  return validate([
+    [
+      !onlineMap[pseudo],
+      messages['POSTACTION_SENDER_NOT_JOINED']
+    ],
+  ])
+}
+
 module.exports = {
   pseudonym: pseudonym,
   hexColor: hexColor,
@@ -132,4 +142,5 @@ module.exports = {
   join: join,
   leave: leave,
   message: message,
+  postAction: postAction,
 }

@@ -4,7 +4,8 @@ CLOSED: [2017-08-25 Fri 15:56]
 CLOSED: [2017-08-25 Fri 13:08]
 ** DONE Message
 CLOSED: [2017-08-25 Fri 15:56]
-* Server specs
+* DONE Server specs
+CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]
 *** DONE Validate psuedonym server-side
@@ -32,12 +33,17 @@ CLOSED: [2017-08-25 Fri 16:53]
 CLOSED: [2017-08-25 Fri 16:53]
 *** DONE Unit testable methods to sync
 CLOSED: [2017-08-25 Fri 16:53]
-** TODO Post messages
+** DONE Post messages
+CLOSED: [2017-08-26 Sat 14:41]
 # POST ROUTE
-*** Check poster has joined
-*** Check message ok
-*** Return errors
-*** Append to room log
+*** DONE Check message ok
+CLOSED: [2017-08-26 Sat 14:36]
+*** DONE Append to room log
+CLOSED: [2017-08-26 Sat 14:36]
+*** DONE Return errors
+CLOSED: [2017-08-26 Sat 14:41]
+*** DONE Check poster has joined
+CLOSED: [2017-08-26 Sat 14:41]
 * Client state specs
 ** Connected (to server) boolean status
 ** My joined / left status

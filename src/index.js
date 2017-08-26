@@ -3,4 +3,5 @@ module.exports = {
   createClient: require('./client'),
   validators: require('./validators'),
   messageStore: require('./messageStore'),
+  createStateReducer: require('./stateReducer')
 }

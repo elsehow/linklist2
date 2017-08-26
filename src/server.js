@@ -78,7 +78,8 @@ function post (io, client, db, messageBody, cb) {
     message: messageBody,
   }
   let errorMsgs = [
-    validators.message(message)
+    validators.message(message),
+    validators.postAction(client.pseudo, online),
   ]
   function serverCb () {
     db.post(message)
