@@ -87,13 +87,40 @@ test('color validator works', t => {
 })
 
 test('message validator works', t => {
+  let templateMessage = {
+    pseudo: 'whatever',
+    message: 'whatever',
+    timestamp: 1,
+  }
+  t.notOk(
+    validators.message(templateMessage),
+    'template message has no errors',
+  )
+  // lets mess with it to create errors
+  templateMessage.message = ''
   t.deepEqual(
-    validators.message(''),
+    validators.message(templateMessage),
+    validators.messages['MESSAGE_CANNOT_BE_EMPTY'],
     validators.messages['MESSAGE_CANNOT_BE_EMPTY'],
   )
+  templateMessage.message = Array(1002).join(',')
   t.deepEqual(
-    validators.message(Array(1002).join(',')),
+    validators.message(templateMessage),
     validators.messages['MESSAGE_TOO_LONG'],
+    validators.messages['MESSAGE_TOO_LONG'],
+  )
+  // random shit that should error
+  t.ok(
+    validators.message({ message: 'whatever', timestamp: 1}),
+    'no pseudo errors',
+  )
+  t.ok(
+    validators.message({ message: 'whatever', pseudo: 'ffff'}),
+    'no timestamp errors'
+  )
+  t.ok(
+    validators.message({ timestamp: 1, pseudo: 'ffff'}),
+    'no message errors'
   )
   t.end()
 })
