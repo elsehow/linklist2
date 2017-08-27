@@ -55,7 +55,10 @@ function render (api, state) {
       })
 
   let currentlyOnline =
-      hx`<div>Online: ${users}</div>`
+      users.length ?
+        hx`<div>Online: ${users}</div>`
+      :
+        hx`<div>No one currently online.</div>`
 
   let loading =
       hx`<div>loading...</div>`
@@ -170,7 +173,6 @@ ${ state.messagesLoading ?
   }, 300)
 
   return hx`<div>
-    <h1>my great webapp</h1>
     ${ !state.connected ? offlineNotice : "" }
     ${ state.errors.length ? errors : '' }
     ${ currentlyOnline }

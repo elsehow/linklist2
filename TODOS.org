@@ -98,11 +98,8 @@ CLOSED: [2017-08-27 Sun 13:21]
 .
   . . .
 
-details
-  .
-  .
-  loading spinner
-  spinner on join, send buttons when waiting
+.
+  . .
 
 css
  big white font
@@ -126,6 +123,9 @@ css
 **** Join attempts with bad stuff shouldn't need server
 **** Post attempts
 ** UI
+*** Spinners
+loading spinner,
+put it on ALL buttons when waiting
 *** Embeddables
 **** Images
 **** Youtube videos
