@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+const linklist = require('.')
+const config = require('./conf.json')
+const ioServer = linklist.createServer(config['server']['port'], config['masterDb'])
+console.log('started server')
