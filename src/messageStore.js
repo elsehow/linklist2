@@ -1,7 +1,9 @@
 const PouchDB = require('pouchdb')
 
 function createClientMessageStore (name, remoteHost) {
+
   const localDB = new PouchDB(name)
+
   // emits messages:
   // - 'change'
   // - 'error'
@@ -11,9 +13,18 @@ function createClientMessageStore (name, remoteHost) {
     live: true,
     retry: true,
   })
+
+  function fetchAllMessages () {
+    return localDB
+      .allDocs({
+        include_docs: true,
+      })
+  }
+
   return {
     db: localDB,
     sync: sync,
+    fetchAllMessages: fetchAllMessages,
   }
 }
 

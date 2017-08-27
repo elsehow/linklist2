@@ -5,8 +5,7 @@ const localDbName = 'mydb'
 const serverDbPath = 'http://localhost:5984/theirRemoteDb'
 // mutable reference (gets assigned during tests)
 let serverDb = null
-let clientDb = null
-let clientSync = null
+let store = null
 
 /*
   Messages datastore
@@ -36,25 +35,24 @@ test('can create a server message store', t => {
 
 test('can create a client message store', t => {
   // create a client db
-  let clientDbMess = messageStore.createClientMessageStore(localDbName, serverDbPath)
-  // update ref to client db
-  clientDb = clientDbMess.db
-  clientSync = clientDbMess.sync
+  store = messageStore.createClientMessageStore(localDbName, serverDbPath)
+  t.ok(store.db)
+  t.ok(store.sync)
   // catch errors from the sync
-  clientSync
+  store
+    .sync
     // .on('active', _ => {
     //   t.ok(true)
     // })
     .on('error', err => {
       t.notOk(err, err)
     })
-  t.ok(clientDb)
-  t.ok(clientSync)
   t.end()
 })
 
 test('posts are synced!', t => {
-  clientSync
+  store
+    .sync
     .on('change', change => {
       t.ok(change, change)
       t.deepEquals(
@@ -62,27 +60,35 @@ test('posts are synced!', t => {
         'ffff',
       )
       t.deepEquals(
-        change.docs[0].message,
-        'sup',
-      )
-      t.deepEquals(
         change.docs[1].pseudo,
         'ffff',
       )
-      t.deepEquals(
-        change.docs[1].message,
-        'cool post',
+      t.equals(
+        change.docs.length,
+        2
       )
       t.end()
     })
-  exampleMessage.message = 'cool post'
+  exampleMessage.message = 'wow'
   serverDb.post(exampleMessage)
 })
 
+test('can fetch all messages', t => {
+  store
+    .fetchAllMessages()
+    .then(messages => {
+      t.end()
+    })
+    .catch(err => {
+      t.notOk(err)
+      t.end()
+    })
+})
+
 test.onFinish(_ => {
-  clientDb.destroy()
+  store.db.destroy()
   serverDb.destroy()
-  clientDb.close()
+  store.db.close()
   serverDb.close()
-  clientSync.cancel()
+  store.sync.cancel()
 })

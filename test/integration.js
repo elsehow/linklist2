@@ -33,7 +33,7 @@ test('can connect to server', t => {
 
 
 test('clients can join, leave rooms, receive online state', t => {
-  t.plan(14)
+  t.plan(15)
   let login = 0 // mutable login counter
 
   /*
@@ -65,6 +65,11 @@ test('clients can join, leave rooms, receive online state', t => {
   /*
     Joining
     */
+
+
+  client.store.sync.on('all-messages', all => {
+    t.ok(all, 'fetch messages once after join')
+  })
 
   client.on('online', online => {
     if (login == 0) {
@@ -174,6 +179,9 @@ test('client can post, receive message from db', t => {
     )
     t.end()
   })
+
+  // client2 has left, should not receive message
+  client2.store.sync.on('change', t.notOk)
 
   // post message
   client.post(function () { console.log('bad')}, function (res) {

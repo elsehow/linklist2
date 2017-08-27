@@ -1,4 +1,4 @@
 // require('./validators')
-// require('./integration')
+require('./integration')
 // require('./messageStore')
-require('./stateReducer')
+// require('./stateReducer')

@@ -4,7 +4,7 @@ CLOSED: [2017-08-25 Fri 15:56]
 CLOSED: [2017-08-25 Fri 13:08]
 ** DONE Message
 CLOSED: [2017-08-25 Fri 15:56]
-* DONE Client/Server specs
+* TODO Client/Server specs
 CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]
@@ -44,13 +44,19 @@ CLOSED: [2017-08-26 Sat 14:36]
 CLOSED: [2017-08-26 Sat 14:41]
 *** DONE Check poster has joined
 CLOSED: [2017-08-26 Sat 14:41]
+** TODO Initial message load on join
+** TODO Assure no new messages after leave
 * Client state specs
 # stateReducer.js
 # Minidux should be good
 ** DONE Replace cb with error event
 CLOSED: [2017-08-26 Sat 15:45]
-** Connected (to server) boolean status
-** My joined / left status
+
+** DONE Connected (to server) boolean status
+CLOSED: [2017-08-26 Sat 16:48]
+** DONE My joined / left status
+CLOSED: [2017-08-26 Sat 16:48]
+** Handle 'online' events
 ** Time-sorted list of messages
 *** Updates when new message posted
 *** Links in posts get broken out
