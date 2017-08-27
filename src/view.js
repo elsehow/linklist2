@@ -105,8 +105,16 @@ ${ state.messagesLoading ?
 </div>`
   }
 
+  function leaveRoom () {
+    return hx`<button
+       onclick=${api.leave}
+       ${state.leavingRoom ? 'disabled' : ''}>
+    >leave room</button>`
+  }
+
   function room () {
     return hx`<div>
+      ${leaveRoom()}
       ${input()}
       ${messages()}
     </div>`
@@ -122,17 +130,7 @@ ${ state.messagesLoading ?
 
 module.exports = render
 
-// text input
-//  . //  . //  .
-// errors
-//   . //   . //   .
-// join screen
-//   . //   . //   . //   . //   .
-// online users
-//   .
-// messages
-//   . //   ... //   . //   .
-//   . //       . //      .
+// text input //  . //  . //  . // errors //   . //   . //   . // join screen //   . //   . //   . //   . //   . // online users //   . // messages //   . //   ... //   . //   . //   . //       . //      . // leave chat too //  ...
 
 // update tests
 //   stateReducer

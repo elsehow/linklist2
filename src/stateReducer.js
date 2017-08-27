@@ -9,6 +9,7 @@ const initialState = {
   colorChoice: null,
   messageInput: '',
   sendingMessageInput: false,
+  leavingRoom: false,
   connected: false,
   messages: [],
   messagesLoading: false,
@@ -77,16 +78,22 @@ function reducer (state=initialState, action) {
     state.errors.push(action.error)
     return state
   case 'left-room':
+    state.leavingRoom = false
     state.messages = []
     state.currentUser = null
     return state
   case 'set-pseudo-input':
-    console.log('setting pseudo input', action)
     state.pseudoInput = action.text
     return state
   case 'set-color-choice':
-    console.log('setting color choice', action)
     state.colorChoice = action.color
+    return state
+  case 'leaving-room':
+    state.leavingRoom = true
+    return state
+  case 'leaving-room-failed':
+    state.leavingRoom = false
+    state.errors.push(action.error)
     return state
   default:
     return state
@@ -164,6 +171,14 @@ function createStateReducer (client) {
           store.dispatch({
             type: 'left-room'
           })
+        else
+          store.dispatch({
+            type: 'leaving-room-failed',
+            error: res,
+          })
+      })
+      store.dispatch({
+        type: 'leaving-room'
       })
     },
 

@@ -16,14 +16,14 @@ var render = partial(
 )
 
 var loop = main(
-  // store.getState(),
+  store.getState(),
   // HACK mock
-  mockStates[10],
+  // mockStates[10],
   render, vdom)
 
 // wire up events eventually
 // TODO
-// store.subscribe(loop.update)
+store.subscribe(loop.update)
 // put the loop on the page
 document.querySelector('#content').appendChild(loop.target)
 // TODO // bind enter key to send

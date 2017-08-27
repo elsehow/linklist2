@@ -98,7 +98,9 @@ mockClient.post = function (msg, cb) {
   }, 1000)
 }
 
-mockClient.leave = function (cb) {cb()}
+mockClient.leave = function (cb) {
+  setTimeout(cb, 1000)
+}
 
 mockClient.mockChange = mockChange
 
