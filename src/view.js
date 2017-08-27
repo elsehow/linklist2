@@ -83,8 +83,7 @@ function render (api, state) {
             ${(state.joining || !state.connected) ? 'disabled' : ''}>
       join</button>
     ${colorPicker}
-    <input id="focusedInput"
-           onchange=${api.setPseudoInput}
+    <input oninput=${api.setPseudoInput}
            value=${state.pseudoInput}>
   </div>`
 
@@ -98,7 +97,7 @@ function render (api, state) {
     <button onclick=${api.sendMessageInput}
             ${(state.sendingMessageInput || !state.connected) ? 'disabled' : ''}>
       send</button>
-    <input id="focusedInput"
+    <input id="messageInput"
            onchange=${api.setMessageInput}
            value=${state.messageInput}>
   </div>`
@@ -136,6 +135,37 @@ ${ state.messagesLoading ?
     hx`<div>
       Currently offline. Reconnecting.....
     </div>`
+
+  /*
+    Set keybindings
+    */
+
+  // HACK
+  // set timeout to "assure" that DOM will be written by the time we bind...
+  setTimeout(function () {
+    let input = document.getElementById("messageInput")
+    // if we have a user, are in the room,
+    if (state.currentUser) {
+      // set input box to focus
+      input.focus()
+      // bind enter key to send
+      document.onkeypress = e => {
+        if (e.which == 13) {
+          // HACK
+          // on enter we unfocus to "make sure" text is picked up
+          input.blur()
+          // then send,
+          api.sendMessageInput()
+          // then refocus,
+          input.focus()
+        }
+      }
+      // if we are not in the room,
+    } else {
+      // make sure that keypress is bound to nothing.
+      document.onkeypress = e => { }
+    }
+  }, 300)
 
   return hx`<div>
     <h1>my great webapp</h1>
