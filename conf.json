@@ -1,0 +1,10 @@
+{
+  "masterDb": "http://localhost:5984/serverDb",
+  "server": {
+    "port": 3000,
+  },
+  "client": {
+    "serverURL": "http://localhost:3000"
+    "db": "localdb",
+  }
+}
