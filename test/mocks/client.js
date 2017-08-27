@@ -74,7 +74,31 @@ mockClient.store.fetchAllMessages = function () {
   mockClient.store.sync.emit('all-messages', mockAllMsgs)
 }
 
-mockClient.join = function () {}
+let myCounter = 0
+mockClient.join = function (pseudo, color, cb) {
+  setTimeout(function () {
+    if (myCounter == 0) {
+      cb('Fake error')
+      myCounter+=1
+    }
+    else
+      cb()
+  }, 10)
+}
+
+let counter = 0
+mockClient.post = function (msg, cb) {
+  setTimeout(function () {
+    if (counter == 0) {
+      cb('Fake error')
+      counter+=1
+    }
+    else
+      cb()
+  }, 10)
+}
+
+mockClient.leave = function (cb) {cb()}
 
 mockClient.mockChange = mockChange
 

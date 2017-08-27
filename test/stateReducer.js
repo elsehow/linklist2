@@ -37,7 +37,7 @@ test('create new state reducer', t => {
     }
   }
   // on an interval
-  var interval = setInterval(next, 10)
+  var interval = setInterval(next, 1)
 })
 
 // TODO error state

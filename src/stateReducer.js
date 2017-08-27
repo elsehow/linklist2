@@ -5,6 +5,7 @@ const initialState = {
   online: {},
   errors: [],
   messageInput: '',
+  sendingMessageInput: false,
   connected: false,
   messages: [],
   messagesLoading: false,
@@ -33,10 +34,13 @@ function reducer (state=initialState, action) {
     state.currentUser = action.currentUser
     state.messagesLoading = true
     return state
-  case 'error':
-    state.errors.push(action.error)
+  case 'attempt-join-failed':
     state.currentUser = null
     state.messagesLoading = false
+    state.errors.push(action.error)
+    return state
+  case 'error':
+    state.errors.push(action.error)
     return state
   case 'clear-errors':
     state.errors = []
@@ -46,11 +50,29 @@ function reducer (state=initialState, action) {
     state.messages = sort(docs(action.all.rows))
     return state
   case 'change':
-    state.messages =
-      sort(state.messages.concat(action.change.docs))
+    if (state.currentUser)
+      state.messages = sort(state.messages.concat(action.change.docs))
     return state
   case 'online':
     state.online = action.online
+    return state
+  case 'set-message-input':
+    state.messageInput = action.text
+    return state
+  case 'send-message-input':
+    state.sendingMessageInput = true
+    return state
+  case 'message-input-sent':
+    state.sendingMessageInput = false
+    state.messageInput = ''
+    return state
+  case 'send-message-input-failed':
+    state.sendingMessageInput = false
+    state.errors.push(action.error)
+    return state
+  case 'left-room':
+    state.messages = []
+    state.currentUser = null
     return state
   default:
     return state
@@ -98,13 +120,54 @@ function createStateReducer (client) {
   store.clientAPI = {
 
     join: function (pseudo, color) {
-      client.join(pseudo, color)
+      // TODO Handle callback
+      client.join(pseudo, color, function (res) {
+        if (res)
+          store.dispatch({
+            type: 'attempt-join-failed',
+            error: res,
+          })
+      })
       store.dispatch({
         type: 'attempt-join',
         currentUser: {
           pseudo: pseudo,
           color: color,
       }})
+    },
+
+    leave: function () {
+      client.leave(function (res) {
+        if (!res)
+          store.dispatch({
+            type: 'left-room'
+          })
+      })
+    },
+
+    setMessageInput: function (text) {
+      store.dispatch({
+        type: 'set-message-input',
+        text: text,
+      })
+    },
+
+    sendMessageInput: function () {
+      let msg = store.getState().messageInput
+      client.post(msg, function (res) {
+        if (!res)
+          store.dispatch({
+            type: 'message-input-sent'
+          })
+        else
+          store.dispatch({
+            type: 'send-message-input-failed',
+            error: res,
+          })
+      })
+      store.dispatch({
+        type: 'send-message-input'
+      })
     },
 
     clearErrors: function () {
