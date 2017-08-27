@@ -87,6 +87,10 @@ CLOSED: [2017-08-26 Sat 17:51]
 ** Hyperxify (if using hyperx)
 ** Serve webapp with config
 * Nice-to-haves
+** Retry 'stateReducer' test
+# start with the initial state
+# after each actions, describe ONLY the expected updates
+# e.g., replace `state:` with `step:` or `reduceStep:`
 ** Remember psuedonym in local storage
 # Load pseudonym from local storage, use to emit join message?
 ** Embeddables

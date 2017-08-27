@@ -39,6 +39,7 @@ function join (io, client, pseudo, hex, cb) {
   function serverCb () {
     // set their pseudonym in socket
     client.pseudo = pseudo
+    client.color = hex
     // mark user as online
     client.online = true
     online[pseudo] = hex
@@ -76,6 +77,7 @@ function post (io, client, db, messageBody, cb) {
     pseudo: client.pseudo,
     timestamp: moment().unix(),
     message: messageBody,
+    senderColor: client.color,
   }
   let errorMsgs = [
     validators.message(message),

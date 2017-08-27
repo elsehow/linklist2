@@ -7,6 +7,10 @@ module.exports = [
       // client.emit('ready')
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [],
       online: {},
       connected: false,
@@ -24,6 +28,10 @@ module.exports = [
       client.emit('connect')
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [],
       online: {},
       connected: true,
@@ -41,6 +49,10 @@ module.exports = [
       client.emit('disconnect')
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [],
       online: {},
       messageInput: '',
@@ -58,6 +70,10 @@ module.exports = [
       client.emit('connect')
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [],
       online: {},
       connected: true,
@@ -76,17 +92,18 @@ module.exports = [
       clientAPI.join('ffff', '#a0a')
     },
     state: {
+      pseudoInput: '',
+      joining: true,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [],
       online: {},
       connected: true,
       messageInput: '',
       sendingMessageInput: false,
-      messagesLoading: true,
+      messagesLoading: false,
       messages: [],
-      currentUser: {
-        pseudo: 'ffff',
-        color: '#a0a',
-      },
+      currentUser: null,
     },
   },
 
@@ -99,6 +116,10 @@ module.exports = [
       errors: [
         'Fake error',
       ],
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       online: {},
       connected: true,
       messageInput: '',
@@ -117,6 +138,53 @@ module.exports = [
     state: {
       online: {},
       errors: [],
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
+      messagesLoading: false,
+      messageInput: '',
+      sendingMessageInput: false,
+      connected: true,
+      messages: [],
+      currentUser: null,
+    },
+  },
+
+  // set pseudo input
+  {
+    happening: function (client, clientAPI) {
+      clientAPI.setPseudoInput(
+        {target: { value: 'ffff' }})
+    },
+    state: {
+      online: {},
+      errors: [],
+      pseudoInput: 'ffff',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
+      messagesLoading: false,
+      messageInput: '',
+      sendingMessageInput: false,
+      connected: true,
+      messages: [],
+      currentUser: null,
+    },
+  },
+
+  // set color choice
+  {
+    happening: function (client, clientAPI) {
+      clientAPI.setColorChoice('#a0a')
+    },
+    state: {
+      online: {},
+      errors: [],
+      pseudoInput: 'ffff',
+      joining: false,
+      colorChoice: '#a0a',
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: '',
       sendingMessageInput: false,
@@ -129,17 +197,41 @@ module.exports = [
   // join again
   {
     happening: function (client, clientAPI) {
-      clientAPI.join('ffff', '#a0a')
+      clientAPI.join()
     },
     state: {
       errors: [],
       online: {},
+      pseudoInput: 'ffff',
+      joining: true,
+      colorChoice: '#a0a',
+      leavingRoom: false,
+      messageInput: '',
+      sendingMessageInput: false,
+      messagesLoading: false,
+      connected: true,
+      messages: [],
+      currentUser: null,
+    },
+  },
+
+  // join complete
+  {
+    happening: function (client, clientAPI) {
+      // console.log('waiting for cb')
+    },
+    state: {
+      errors: [],
+      online: {},
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messageInput: '',
       sendingMessageInput: false,
       messagesLoading: true,
       connected: true,
-      messages: [
-      ],
+      messages: [],
       currentUser: {
         pseudo: 'ffff',
         color: '#a0a',
@@ -154,13 +246,21 @@ module.exports = [
     state: {
       errors: [],
       online: {},
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: '',
       sendingMessageInput: false,
       connected: true,
       messages: [
-        { pseudo: 'ffff', timestamp: 1503792916, message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a', _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
-        { pseudo: 'ffff', timestamp: 1503792918, message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
+        { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
+          message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a', _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
+        { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
+          message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
       ],
       currentUser: {
         pseudo: 'ffff',
@@ -177,6 +277,10 @@ module.exports = [
     state: {
       errors: [],
       online: {},
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messageInput: '',
       sendingMessageInput: false,
       messagesLoading: false,
@@ -222,6 +326,10 @@ module.exports = [
         'ffff': '#a0a',
         'aaaa': '#00a',
       },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: '',
       sendingMessageInput: false,
@@ -255,7 +363,7 @@ module.exports = [
   // enter a message
   {
     happening: function (client, clientAPI) {
-      clientAPI.setMessageInput('hey everyone')
+      clientAPI.setMessageInput({ target: { value: 'hey everyone' }})
     },
     state: {
       errors: [],
@@ -263,6 +371,10 @@ module.exports = [
         'ffff': '#a0a',
         'aaaa': '#00a',
       },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: 'hey everyone',
       sendingMessageInput: false,
@@ -303,6 +415,10 @@ module.exports = [
         'ffff': '#a0a',
         'aaaa': '#00a',
       },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: 'hey everyone',
       // now we are 'sending' (send is pending)
@@ -340,6 +456,10 @@ module.exports = [
       // console.log('waiting for cb...')
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [
         'Fake error'
       ],
@@ -383,6 +503,10 @@ module.exports = [
       clientAPI.sendMessageInput()
     },
     state: {
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       errors: [
         'Fake error'
       ],
@@ -434,6 +558,10 @@ module.exports = [
         'ffff': '#a0a',
         'aaaa': '#00a',
       },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: '',
       // now we are 'sending' (send is pending)
@@ -464,8 +592,54 @@ module.exports = [
     },
   },
 
-  // leave room, no messages, just who is online
-  // now it's sent, disappears from box
+  // leave room, we're now leavingRoom
+  {
+    happening: function (client, clientAPI) {
+      // console.log('waiting for cb again')
+    },
+    state: {
+      errors: [
+        'Fake error'
+      ],
+      online: {
+        'ffff': '#a0a',
+        'aaaa': '#00a',
+      },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: true,
+      messagesLoading: false,
+      messageInput: '',
+      // now we are 'sending' (send is pending)
+      sendingMessageInput: false,
+      connected: true,
+      currentUser: {
+        pseudo: 'ffff',
+        color: '#a0a',
+      },
+      messages: [
+        { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
+          message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
+          _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
+        { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
+          message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
+          _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
+         message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
+         _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
+         message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
+         _rev: "1-155f315264194403ab360a46ddeb54d7"},
+      ],
+    },
+  },
+
+  // now we've left room, no messages, just who is online
   {
     happening: function (client, clientAPI) {
       clientAPI.leave()
@@ -478,6 +652,10 @@ module.exports = [
         'ffff': '#a0a',
         'aaaa': '#00a',
       },
+      pseudoInput: '',
+      joining: false,
+      colorChoice: null,
+      leavingRoom: false,
       messagesLoading: false,
       messageInput: '',
       // now we are 'sending' (send is pending)

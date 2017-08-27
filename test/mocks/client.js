@@ -2,6 +2,8 @@ const EventEmitter = require('events').EventEmitter
 
 const mockClient = new EventEmitter()
 
+const cbSpeed = 10
+
 mockClient.store = {
   db:   new EventEmitter(),
   sync: new EventEmitter(),
@@ -20,6 +22,7 @@ const mockAllMsgs =  {
         "rev": "1-b99bd717eb8e4fa685b9ea0210a570cb"
       },
       "doc": {
+        "senderColor": '#a0a',
         "pseudo": "ffff",
         "timestamp": 1503792916,
         "message": "sup",
@@ -35,6 +38,7 @@ const mockAllMsgs =  {
       },
       "doc": {
         "pseudo": "ffff",
+        "senderColor": '#a0a',
         "timestamp": 1503792918,
         "message": "hey",
         "_id": "e086b6a8-b4d9-4669-f09e-fcb65e5d39b4",
@@ -57,6 +61,7 @@ const mockChange =  {
       "pseudo": "ffff",
       "timestamp": 1503793059,
       "message": "what it is",
+      "senderColor": '#00a',
       "_id": "a504259e-ecfc-483d-fb23-44c71125ded2",
       "_rev": "1-155f315264194403ab360a46ddeb54d7"
     },
@@ -64,6 +69,7 @@ const mockChange =  {
       "pseudo": "ffff",
       "timestamp": 1503793056,
       "message": "hey",
+      "senderColor": '#00a',
       "_id": "72c5e803-f509-4f39-9b01-dc47cac650d5",
       "_rev": "1-6603e1a0b3474943a8f70e6397824f64"
     }
@@ -83,7 +89,7 @@ mockClient.join = function (pseudo, color, cb) {
     }
     else
       cb()
-  }, 1000)
+  }, cbSpeed)
 }
 
 let counter = 0
@@ -95,11 +101,11 @@ mockClient.post = function (msg, cb) {
     }
     else
       cb()
-  }, 1000)
+  }, cbSpeed)
 }
 
 mockClient.leave = function (cb) {
-  setTimeout(cb, 1000)
+  setTimeout(cb, cbSpeed)
 }
 
 mockClient.mockChange = mockChange

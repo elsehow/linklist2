@@ -38,6 +38,8 @@ function reducer (state=initialState, action) {
     state.joining = true
     return state
   case 'attempt-join-success':
+    state.pseudoInput = ''
+    state.colorChoice = null
     state.joining = false
     state.currentUser = action.currentUser
     state.messagesLoading = true
@@ -216,7 +218,7 @@ function createStateReducer (client) {
       })
     },
 
-    setPseudoInput: function (ev) {
+    setPseudoInput: function (event) {
       let text = event.target.value
       store.dispatch({
         type: 'set-pseudo-input',

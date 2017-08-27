@@ -130,16 +130,7 @@ ${ state.messagesLoading ?
 
 module.exports = render
 
-// text input //  . //  . //  . // errors //   . //   . //   . // join screen //   . //   . //   . //   . //   . // online users //   . // messages //   . //   ... //   . //   . //   . //       . //      . // leave chat too //  ...
-
-// update tests
-//   stateReducer
-//    state.pseudoInput
-//    state.colorChoice
-//    state.joining
-//    mock sender colors
-//   integration
-//    post contains senderColor
+// text input //  . //  . //  . // errors //   . //   . //   . // join screen //   . //   . //   . //   . //   . // online users //   . // messages //   . //   ... //   . //   . //   . //       . //      . // leave chat too //  ... //   integration //    .
 
 // set it up for real...
 //   config

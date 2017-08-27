@@ -174,6 +174,10 @@ test('client can post, receive message from db', t => {
       'ffff'
     )
     t.deepEquals(
+      change.docs[0].senderColor,
+      '#fff'
+    )
+    t.deepEquals(
       change.docs[0].message,
       'Hello sweet world'
     )
