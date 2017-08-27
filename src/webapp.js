@@ -3,7 +3,7 @@ var main = require('main-loop')
 var partial = require('lodash.partial')
 
 // TODO HACK import mock states
-// var mockStates = require('../test/mocks/clientStates').map(s => s.state)
+var mockStates = require('../test/mocks/clientStates').map(s => s.state)
 // TODO mock client for now
 const mockClient = require('../test/mocks/client')
 const store = require('.')
@@ -16,11 +16,14 @@ var render = partial(
 )
 
 var loop = main(
-  store.getState(),
+  // store.getState(),
+  // HACK mock
+  mockStates[10],
   render, vdom)
 
 // wire up events eventually
-store.subscribe(loop.update)
+// TODO
+// store.subscribe(loop.update)
 // put the loop on the page
 document.querySelector('#content').appendChild(loop.target)
 // TODO // bind enter key to send

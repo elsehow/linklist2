@@ -33,12 +33,15 @@ function reducer (state=initialState, action) {
     state.connected = false
     return state
   case 'attempt-join':
+    state.joining = true
+    return state
+  case 'attempt-join-success':
+    state.joining = false
     state.currentUser = action.currentUser
     state.messagesLoading = true
     return state
   case 'attempt-join-failed':
-    state.currentUser = null
-    state.messagesLoading = false
+    state.joining = false
     state.errors.push(action.error)
     return state
   case 'error':
@@ -140,13 +143,18 @@ function createStateReducer (client) {
             type: 'attempt-join-failed',
             error: res,
           })
+        else
+          store.dispatch({
+            type: 'attempt-join-success',
+            currentUser: {
+              pseudo: pseudo,
+              color: color,
+            }
+          })
       })
       store.dispatch({
         type: 'attempt-join',
-        currentUser: {
-          pseudo: pseudo,
-          color: color,
-      }})
+      })
     },
 
     leave: function () {
