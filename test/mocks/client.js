@@ -35,8 +35,8 @@ const mockAllMsgs =  {
       },
       "doc": {
         "pseudo": "ffff",
-        "timestamp": 1503792916,
-        "message": "sup",
+        "timestamp": 1503792918,
+        "message": "hey",
         "_id": "e086b6a8-b4d9-4669-f09e-fcb65e5d39b4",
         "_rev": "1-1cc2fbb2e9c543d0bd8f871acbdf73d3"
       }
@@ -56,14 +56,14 @@ const mockChange =  {
     {
       "pseudo": "ffff",
       "timestamp": 1503793056,
-      "message": "sup",
+      "message": "what it is",
       "_id": "a504259e-ecfc-483d-fb23-44c71125ded2",
       "_rev": "1-155f315264194403ab360a46ddeb54d7"
     },
     {
       "pseudo": "ffff",
       "timestamp": 1503793056,
-      "message": "wow",
+      "message": "hey",
       "_id": "72c5e803-f509-4f39-9b01-dc47cac650d5",
       "_rev": "1-6603e1a0b3474943a8f70e6397824f64"
     }
@@ -71,7 +71,7 @@ const mockChange =  {
 }
 
 mockClient.store.fetchAllMessages = function () {
-  mockClient.db.sync.emit('all-messages', mockAllMsgs)
+  mockClient.store.sync.emit('all-messages', mockAllMsgs)
 }
 
 mockClient.join = function () {}

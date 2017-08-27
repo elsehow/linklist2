@@ -5,7 +5,6 @@ CLOSED: [2017-08-25 Fri 13:08]
 ** DONE Message
 CLOSED: [2017-08-25 Fri 15:56]
 * TODO Client/Server specs
-CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]
 *** DONE Validate psuedonym server-side
@@ -44,7 +43,8 @@ CLOSED: [2017-08-26 Sat 14:36]
 CLOSED: [2017-08-26 Sat 14:41]
 *** DONE Check poster has joined
 CLOSED: [2017-08-26 Sat 14:41]
-** TODO Initial message load on join
+** DONE Initial message load on join
+CLOSED: [2017-08-26 Sat 17:44]
 ** TODO Assure no new messages after leave
 * Client state specs
 # stateReducer.js
@@ -56,14 +56,19 @@ CLOSED: [2017-08-26 Sat 15:45]
 CLOSED: [2017-08-26 Sat 16:48]
 ** DONE My joined / left status
 CLOSED: [2017-08-26 Sat 16:48]
-** Handle 'online' events
-** Time-sorted list of messages
-*** Updates when new message posted
-*** Links in posts get broken out
-*** Links have an `image` property set to True if they are HTML embeddable
+** DONE Time-sorted list of messages
+CLOSED: [2017-08-26 Sat 17:51]
+*** DONE Updates on join
+CLOSED: [2017-08-26 Sat 17:44]
+*** DONE Updates on 'change'
+CLOSED: [2017-08-26 Sat 17:51]
+** TODO Handle 'online' events
+** TODO method to 'leave' actions
+** TODO method to 'post'
 ** Error state
 *** Errors appear in some error-y state
-*** Errors clear when the source of the error disappears
+*** DONE Errors can clear
+CLOSED: [2017-08-26 Sat 17:51]
 * UI specs
 # webapp.js
 ** Display join view when not connected

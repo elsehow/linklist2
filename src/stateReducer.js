@@ -1,4 +1,5 @@
 const createStore = require('minidux').createStore
+const sortBy = require('lodash.sortby')
 
 const initialState = {
   errors: [],
@@ -6,6 +7,16 @@ const initialState = {
   messages: [],
   messagesLoading: false,
   currentUser: null,
+}
+
+function sort (docs) {
+  return sortBy(docs, 'timestamp')
+}
+
+function docs (rows) {
+  return rows.map(r => {
+    return r.doc
+  })
 }
 
 function reducer (state=initialState, action) {
@@ -30,8 +41,13 @@ function reducer (state=initialState, action) {
     state.errors = []
     return state
   case 'all-messages':
-    console.log('reached all messages')
-    state.messages = action.all.rows
+    console.log('reached all messages', action)
+    state.messages = sort(docs(action.all.rows))
+    return state
+  case 'change':
+    console.log('reached change')
+    state.messages =
+      sort(state.messages.concat(action.change.docs))
     return state
   default:
     return state
@@ -51,7 +67,11 @@ function createStateReducer (client) {
   // wire up sync events
   client.store.sync.on('all-messages', all => store.dispatch({
     type: 'all-messages',
-    allMessages: all,
+    all: all,
+  }))
+  client.store.sync.on('change', change=> store.dispatch({
+    type: 'change',
+    change: change,
   }))
 
   // construct client API
