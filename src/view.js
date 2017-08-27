@@ -127,3 +127,5 @@ ${ state.messagesLoading ?
     ${ state.currentUser ? room() : join() }
   </div>`
 }
+
+module.exports = render

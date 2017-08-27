@@ -1,21 +1,31 @@
-var vdom = require('virtual-dom')
-var main = require('main-loop')
-var partial = require('lodash.partial')
+const vdom = require('virtual-dom')
+const main = require('main-loop')
+const partial = require('lodash.partial')
+const config = require('../conf.json')
 
 // TODO HACK import mock states
-var mockStates = require('../test/mocks/clientStates').map(s => s.state)
+// const mockStates = require('../test/mocks/clientStates').map(s => s.state)
 // TODO mock client for now
-const mockClient = require('../test/mocks/client')
+// const client = require('../test/mocks/client')
+
+const createClient = require('.').createClient
+
+const client = createClient(
+  config['client']['serverURL'],
+  config['client']['dbName'],
+  config['masterDb'],
+)
+
 const store = require('.')
-      .createStateReducer(mockClient)
+      .createStateReducer(client)
 
 // setup page
-var render = partial(
+const render = partial(
   require('./view'),
   store.clientAPI
 )
 
-var loop = main(
+const loop = main(
   store.getState(),
   // HACK mock
   // mockStates[10],
