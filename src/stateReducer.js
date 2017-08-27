@@ -5,6 +5,7 @@ const initialState = {
   online: {},
   errors: [],
   pseudoInput: '',
+  joining: false,
   colorChoice: null,
   messageInput: '',
   sendingMessageInput: false,

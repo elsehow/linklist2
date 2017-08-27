@@ -73,7 +73,7 @@ module.exports = [
   // try to join a room
   {
     happening: function (client, clientAPI) {
-      clientAPI.join('ffff', '#fff')
+      clientAPI.join('ffff', '#a0a')
     },
     state: {
       errors: [],
@@ -85,7 +85,7 @@ module.exports = [
       messages: [],
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
     },
   },
@@ -129,7 +129,7 @@ module.exports = [
   // join again
   {
     happening: function (client, clientAPI) {
-      clientAPI.join('ffff', '#fff')
+      clientAPI.join('ffff', '#a0a')
     },
     state: {
       errors: [],
@@ -142,7 +142,7 @@ module.exports = [
       ],
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
     },
   },
@@ -164,7 +164,7 @@ module.exports = [
       ],
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
     },
   },
@@ -183,19 +183,23 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
       ],
@@ -207,16 +211,16 @@ module.exports = [
     happening: function (client, clientAPI) {
       client.emit('online',
                   {
-                    'ffff': '#fff',
-                    'aaaa': '#a0a0a',
+                    'ffff': '#a0a',
+                    'aaaa': '#00a',
                   }
                  )
     },
     state: {
       errors: [],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: '',
@@ -224,19 +228,24 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
+
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
       ],
@@ -251,8 +260,8 @@ module.exports = [
     state: {
       errors: [],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: 'hey everyone',
@@ -260,19 +269,23 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
       ],
@@ -287,8 +300,8 @@ module.exports = [
     state: {
       errors: [],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: 'hey everyone',
@@ -297,21 +310,26 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
+
       ],
     },
   },
@@ -326,8 +344,8 @@ module.exports = [
         'Fake error'
       ],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: 'hey everyone',
@@ -336,19 +354,23 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
       ],
@@ -365,8 +387,8 @@ module.exports = [
         'Fake error'
       ],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: 'hey everyone',
@@ -375,21 +397,26 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
+
       ],
     },
   },
@@ -404,8 +431,8 @@ module.exports = [
         'Fake error'
       ],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: '',
@@ -414,19 +441,23 @@ module.exports = [
       connected: true,
       currentUser: {
         pseudo: 'ffff',
-        color: '#fff',
+        color: '#a0a',
       },
       messages: [
         { pseudo: 'ffff', timestamp: 1503792916,
+          senderColor: '#a0a',
           message: 'sup', _id: '858cf07f-660b-4a69-9878-713b2bc04d6a',
           _rev: '1-b99bd717eb8e4fa685b9ea0210a570cb' },
         { pseudo: 'ffff', timestamp: 1503792918,
+          senderColor: '#a0a',
           message: 'hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4',
           _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
-        {pseudo: "ffff", timestamp: 1503793056,
+        {pseudo: "aaaa", timestamp: 1503793056,
+         senderColor: '#00a',
          message: "hey", _id: "72c5e803-f509-4f39-9b01-dc47cac650d5",
          _rev: "1-6603e1a0b3474943a8f70e6397824f64"},
-        {pseudo: "ffff", timestamp: 1503793059,
+        {pseudo: "aaaa", timestamp: 1503793059,
+         senderColor: '#00a',
          message: "what it is", _id: "a504259e-ecfc-483d-fb23-44c71125ded2",
          _rev: "1-155f315264194403ab360a46ddeb54d7"},
       ],
@@ -444,8 +475,8 @@ module.exports = [
         'Fake error'
       ],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: '',
@@ -468,8 +499,8 @@ module.exports = [
         'Fake error'
       ],
       online: {
-        'ffff': '#fff',
-        'aaaa': '#a0a0a',
+        'ffff': '#a0a',
+        'aaaa': '#00a',
       },
       messagesLoading: false,
       messageInput: '',

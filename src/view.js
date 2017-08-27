@@ -57,9 +57,37 @@ function render (api, state) {
   </div>`
   }
 
+  function currentlyOnline () {
+    let users = Object.keys(state.online)
+        .map(function (user) {
+          return hx`<div
+           style="color: ${state.online[user]};">
+            ${user}
+          </div>`
+        })
+    return hx`<div>Online: ${users}</div>`
+  }
+
+  function loading () {
+    return hx`<div>loading...</div>`
+  }
+
   function message (m) {
-    return hx`<div>
-${m.message}
+    return hx`<div
+                 style="display: flex;"
+>
+<div
+  style="background-color: ${m.senderColor};
+         width: 5px;
+         align-items: stretch;
+         align-content: stretch;
+">
+</div>
+<div style="flex-grow:1">
+  <div> ${m.pseudo} </div>
+  <div> ${m.timestamp} </div>
+  <div> ${m.message} </div>
+</div>
 </div>`
   }
 
@@ -67,7 +95,7 @@ ${m.message}
     let displayedMessages = state.messages.map(message)
     return hx`<div>
 ${ state.messagesLoading ?
-  "loading..."
+  loading()
   :
   state.messages.length ?
     displayedMessages
@@ -87,6 +115,7 @@ ${ state.messagesLoading ?
   return hx`<div>
     <h1>my great webapp</h1>
     ${ state.errors.length ? errors() : '' }
+    ${ currentlyOnline() }
     ${ state.currentUser ? room() : join() }
   </div>`
 }
@@ -99,15 +128,35 @@ module.exports = render
 //   . //   . //   .
 // join screen
 //   . //   . //   . //   . //   .
-
-
-// messages
-//   show loading spinner when loading
-//   show messages in order
 // online users
-//   show who is online
-//   show who you are logged in as
+//   .
+// messages
+//   . //   ... //   . //   .
+//   . //       . //      .
+
+// update tests
+//   stateReducer
+//    state.pseudoInput
+//    state.colorChoice
+//    state.joining
+//    mock sender colors
+//   integration
+//    post contains senderColor
+
+// set it up for real...
+//   config
+//     routes
+//     dbs
+//   serv
+//   play, find bugs and notice
+
 // details
-//   show connected status
-//   show loading spinner
 //   enter sends message
+//   loading spinner
+//   spinner on join, send buttons when waiting
+//   cannot send/join unless connected
+
+// css
+//  big white font
+//  big bar on top
+//  small gray sender / time
