@@ -29,6 +29,7 @@ test('create new state reducer', t => {
     t.deepEquals(
       state,
       mockClientStates[i].state,
+      'matches state ' + i
     )
     i+=1
   })

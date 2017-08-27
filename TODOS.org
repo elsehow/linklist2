@@ -79,8 +79,12 @@ CLOSED: [2017-08-26 Sat 17:51]
 * TODO UI specs
 # webapp.js
 # expected HTML for each state
+
+# - figure out what's cool these days, main-loop or whatever
+# - hyperx, virtualdom, ...
 * App entrypoint
 ** Build webapp
+** Hyperxify (if using hyperx)
 ** Serve webapp with config
 * Nice-to-haves
 ** Remember psuedonym in local storage
