@@ -45,7 +45,7 @@ CLOSED: [2017-08-26 Sat 14:41]
 CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Initial message load on join
 CLOSED: [2017-08-26 Sat 17:44]
-** TODO Assure no new messages after leave
+** TODO Send `online` map upon join
 * Client state specs
 # stateReducer.js
 # Minidux should be good
@@ -62,10 +62,12 @@ CLOSED: [2017-08-26 Sat 17:51]
 CLOSED: [2017-08-26 Sat 17:44]
 *** DONE Updates on 'change'
 CLOSED: [2017-08-26 Sat 17:51]
-** TODO Handle 'online' events
-** TODO method to 'leave' actions
+** DONE Handle 'online' events
+CLOSED: [2017-08-26 Sat 20:57]
 ** TODO method to 'post'
-** Error state
+** TODO method to 'leave' actions
+** DONE Error state
+CLOSED: [2017-08-26 Sat 21:03]
 *** Errors appear in some error-y state
 *** DONE Errors can clear
 CLOSED: [2017-08-26 Sat 17:51]

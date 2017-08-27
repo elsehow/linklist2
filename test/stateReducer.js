@@ -4,6 +4,7 @@ const createStateReducer = require('..').createStateReducer
 const mockClient = require('./mocks/client')
 
 const mockClientStates = require('./mocks/clientStates')
+let store = null
 
 test('state reducer exists', t => {
   t.ok(createStateReducer)
@@ -11,14 +12,13 @@ test('state reducer exists', t => {
 })
 
 test('create new state reducer', t => {
-  let store = createStateReducer(mockClient)
+  store = createStateReducer(mockClient)
   t.ok(store)
   t.end()
 })
 
 test('create new state reducer', t => {
   let i = 0 // mutable counter
-  let store = createStateReducer(mockClient)
   // go through each state in order
   store.subscribe(function (state) {
     t.deepEquals(

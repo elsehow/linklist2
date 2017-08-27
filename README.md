@@ -2,15 +2,19 @@
 
 see [TODOS.org](TODOS.org)
 
-## install
+## developing
 
-```
-```
+clone this repository, then
 
-## use
+    npm install
+    npm run watch
 
-```js
-```
+now you can edit js files in src/ and test/ - tests will automatically re-run
+
+to start a server, easiest thing is
+
+    cd .pouchcrap
+    pouchdb-server --port 5984
 
 ## license
 

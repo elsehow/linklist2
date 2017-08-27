@@ -55,7 +55,7 @@ const mockChange =  {
   "docs": [
     {
       "pseudo": "ffff",
-      "timestamp": 1503793056,
+      "timestamp": 1503793059,
       "message": "what it is",
       "_id": "a504259e-ecfc-483d-fb23-44c71125ded2",
       "_rev": "1-155f315264194403ab360a46ddeb54d7"
