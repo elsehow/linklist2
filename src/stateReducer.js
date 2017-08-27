@@ -145,7 +145,9 @@ function createStateReducer (client) {
       })
     },
 
-    setMessageInput: function (text) {
+    setMessageInput: function (event) {
+      let text = event.target.value
+      console.log('setting to', text)
       store.dispatch({
         type: 'set-message-input',
         text: text,
@@ -154,6 +156,7 @@ function createStateReducer (client) {
 
     sendMessageInput: function () {
       let msg = store.getState().messageInput
+      console.log('sending', msg)
       client.post(msg, function (res) {
         if (!res)
           store.dispatch({

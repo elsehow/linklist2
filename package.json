@@ -3,22 +3,32 @@
   "license": "BSD-3-Clause",
   "main": "src/index.js",
   "scripts": {
+    "build-webapp": "watchify -vd -p browserify-hmr src/webapp.js -o dist/bundle.js",
+    "serve-webapp": "ecstatic --port 9999 dist",
     "test": "tape test/index.js | tap-spec",
     "watch": "runwatch \"**/*.js\" -r \"npm test\""
   },
   "devDependencies": {
+    "browserify-hmr": "^0.3.5",
+    "ecstatic": "^2.2.1",
     "runwatch": "^0.1.3",
     "socket.io-client": "^2.0.3",
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "watchify": "^3.9.0"
   },
   "dependencies": {
+    "bufferutil": "^3.0.2",
+    "hyperx": "^2.3.0",
     "is-hex-color": "0.0.1",
     "lodash.partial": "^4.2.1",
     "lodash.sortby": "^4.7.0",
+    "main-loop": "^3.4.0",
     "minidux": "^1.0.1",
     "moment": "^2.18.1",
     "pouchdb": "^6.3.4",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "utf-8-validate": "^3.0.3",
+    "virtual-dom": "^2.1.1"
   }
 }

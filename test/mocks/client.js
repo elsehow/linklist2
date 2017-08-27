@@ -95,7 +95,7 @@ mockClient.post = function (msg, cb) {
     }
     else
       cb()
-  }, 10)
+  }, 1000)
 }
 
 mockClient.leave = function (cb) {cb()}
