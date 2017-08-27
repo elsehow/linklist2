@@ -13,12 +13,17 @@ test('state reducer exists', t => {
 
 test('create new state reducer', t => {
   store = createStateReducer(mockClient)
+  t.deepEquals(
+    store.getState(),
+    mockClientStates[0].state,
+  )
   t.ok(store)
   t.end()
 })
 
 test('create new state reducer', t => {
-  let i = 0 // mutable counter
+  let i = 1 // mutable counter
+  // start at 1 - we already tested initial state, above
   // go through each state in order
   store.subscribe(function (state) {
     t.deepEquals(

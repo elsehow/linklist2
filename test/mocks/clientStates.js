@@ -3,7 +3,8 @@ module.exports = [
   // initial state
   {
     happening: function (client) {
-      client.emit('ready')
+      console.log('waiting for cb')
+      // client.emit('ready')
     },
     state: {
       errors: [],
@@ -92,7 +93,7 @@ module.exports = [
   // ERROR! Bad username
   {
     happening: function (client, clientAPI) {
-      console.log('waiting for callback...')
+      // console.log('waiting for callback...')
     },
     state: {
       errors: [
@@ -318,7 +319,7 @@ module.exports = [
   // server error! message still in box
   {
     happening: function (client, clientAPI) {
-      console.log('waiting for cb...')
+      // console.log('waiting for cb...')
     },
     state: {
       errors: [
@@ -396,7 +397,7 @@ module.exports = [
   // now it's sent, disappears from box
   {
     happening: function (client, clientAPI) {
-      console.log('waiting for cb again')
+      // console.log('waiting for cb again')
     },
     state: {
       errors: [

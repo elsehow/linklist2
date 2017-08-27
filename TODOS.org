@@ -4,7 +4,8 @@ CLOSED: [2017-08-25 Fri 15:56]
 CLOSED: [2017-08-25 Fri 13:08]
 ** DONE Message
 CLOSED: [2017-08-25 Fri 15:56]
-* TODO Client/Server specs
+* DONE Client/Server specs
+CLOSED: [2017-08-27 Sun 01:09]
 ** DONE Joinable room
 CLOSED: [2017-08-25 Fri 15:49]
 *** DONE Validate psuedonym server-side
@@ -45,8 +46,10 @@ CLOSED: [2017-08-26 Sat 14:41]
 CLOSED: [2017-08-26 Sat 14:41]
 ** DONE Initial message load on join
 CLOSED: [2017-08-26 Sat 17:44]
-** TODO Send `online` map upon join
-* Client state specs
+** DONE Eliminate 'ready' event
+CLOSED: [2017-08-27 Sun 01:09]
+* DONE Client state specs
+CLOSED: [2017-08-26 Sat 22:08]
 # stateReducer.js
 # Minidux should be good
 ** DONE Replace cb with error event
@@ -64,54 +67,45 @@ CLOSED: [2017-08-26 Sat 17:44]
 CLOSED: [2017-08-26 Sat 17:51]
 ** DONE Handle 'online' events
 CLOSED: [2017-08-26 Sat 20:57]
-** TODO method to 'post'
-** TODO method to 'leave' actions
+** DONE method to 'post'
+CLOSED: [2017-08-26 Sat 22:08]
+** DONE method to 'leave' actions
+CLOSED: [2017-08-26 Sat 22:08]
 ** DONE Error state
 CLOSED: [2017-08-26 Sat 21:03]
 *** Errors appear in some error-y state
 *** DONE Errors can clear
 CLOSED: [2017-08-26 Sat 17:51]
-* UI specs
+* TODO UI specs
 # webapp.js
-** Display join view when not connected
-** Display room view when connected
-*** List of posts are there
-**** In the correct (time-sorted) order, newest at bottom
-**** Links to images get embedded below posts
-**** URLs become link-ified
-**** Times appear next to messages
-**** Usernames appear next to messages
-**** A bar with the user's color appears next to messages
-*** Post button is there
-*** Message input is there
-** Display error when there is one
+# expected HTML for each state
+* App entrypoint
+** Build webapp
+** Serve webapp with config
 * Nice-to-haves
+** Remember psuedonym in local storage
+# Load pseudonym from local storage, use to emit join message?
+** Embeddables
+*** Images
+*** Youtube videos
+*** Soundcloud
+** Performance tricks on pathological #s of posts
 ** Unread status
 *** Thicker bar on unread messages
 ** Favicon
 *** Online
 *** Offline
 *** Online & unread messages
-** Embeddables
-*** Images
-*** Youtube videos
-*** Soundcloud
-** Remember psuedonym with cookie
-# Load pseudonym from local storage, use to emit join message?
 ** Return errors from server `db.post` call
-** Performance tricks on pathological #s of posts
 ** Validate stuff on the client-side
 # minidux can do this with createStore(reuder, initial, *enhancer*)
 *** Join attempts with bad stuff shouldn't need server
 *** Post attempts
-** Can't replicate from remote unless joined room
-** Catch around all validation stuff - returns unexpected errors
 * Refactors
-** Make validator export error messages - import them from the tests
+** DONE Make validator export error messages - import them from the tests
+CLOSED: [2017-08-26 Sat 22:11]
 ** DONE More DRY websocket client routes
 CLOSED: [2017-08-25 Fri 14:13]
-** Break out validation in server.js to validation.js
-** Integration test could be more DRY
-** Integration test could be more concise
-** Config configures server /and/ client routes
-# Perhaps via templating the html
+** DONE Break out validation in server.js to validation.js
+CLOSED: [2017-08-26 Sat 22:11]
+** Integration test could be more DRY, concise

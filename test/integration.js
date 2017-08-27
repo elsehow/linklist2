@@ -180,8 +180,8 @@ test('client can post, receive message from db', t => {
     t.end()
   })
 
-  // client2 has left, should not receive message
-  client2.store.sync.on('change', t.notOk)
+  // NOTE even though client2 has left, should receive message
+  client2.store.sync.on('change', t.ok)
 
   // post message
   client.post(function () { console.log('bad')}, function (res) {
