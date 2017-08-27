@@ -8,7 +8,6 @@ function createClient (serverUrl, localDbName, serverDbPath) {
 
   function handle (cb) {
     return function (errorMessage) {
-      socket.emit('error', errorMessage)
       if (cb)
         cb(errorMessage)
     }

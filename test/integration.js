@@ -5,7 +5,7 @@ const linklist = require('..')
 
 
 // test config
-const serverPort = 3000
+const serverPort = 3030
 const serverUrl = 'http://localhost:'+serverPort
 const serverDbPath = 'http://localhost:5984/theirDb'
 const localDbName = 'testerdb'

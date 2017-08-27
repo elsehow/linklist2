@@ -17,7 +17,7 @@ const initialState = {
 }
 
 function sort (docs) {
-  return sortBy(docs, 'timestamp')
+  return sortBy(docs, 'timestamp').reverse()
 }
 
 function docs (rows) {

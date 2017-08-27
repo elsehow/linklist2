@@ -85,17 +85,26 @@ CLOSED: [2017-08-27 Sun 13:03]
 # - hyperx, virtualdom, ...
 
 # // text input //  . //  . //  . // errors //   . //   . //   . // join screen //   . //   . //   . //   . //   . // online users //   . // messages //   . //   ... //   . //   . //   . //       . //      . // leave chat too //  ... //   integration //    .
-* TODO App entrypoint
+* DONE App entrypoint
+CLOSED: [2017-08-27 Sun 13:21]
 ** DONE Build webapp
 CLOSED: [2017-08-27 Sun 13:04]
-** TODO Run server with config
-** Build webapp with config
+** DONE Run server with config
+CLOSED: [2017-08-27 Sun 13:21]
+** DONE Build webapp with config
+CLOSED: [2017-08-27 Sun 13:21]
 * UI Details
+
+immediate issues
+  `false` shows up as an error
+  .
+
 details
   enter sends message
   loading spinner
   spinner on join, send buttons when waiting
   cannot send/join unless connected
+  dates should be "ago"
 
 css
  big white font

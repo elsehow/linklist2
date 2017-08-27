@@ -101,24 +101,20 @@ function createServer (port, dbHost) {
   const io = socket(serv)
   const db = messageStore.createServerMessageStore(dbHost)
 
+  // upon connection
   io.on('connection', client => {
-    // console.log('client connected!')
-    // client.on('disconnect', _ => {
-    //   console.log('client disconnected!')
-    // })
-    // routes
+    // setup routes
     client.on('join', partial(join, io, client))
     client.on('leave', partial(leave, io, client))
     client.on('disconnect', partial(disconnect, io, client))
     client.on('post', partial(post, io, client, db))
-
   })
 
   serv.db = db
 
   serv.stop = function () {
     serv.close()
-    serv.db.close()
+    db.close()
   }
 
   serv.listen(port)
