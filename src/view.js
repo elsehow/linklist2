@@ -9,71 +9,8 @@ var colors = [
   '#00a',
 ]
 
-function render (api, state) {
-
-  function errors () {
-    let errorLis = state.errors.map(e => hx`<li>${e}</li>`)
-    return hx`<div>
-      <ul>${errorLis}</ul>
-      <button onclick=${api.clearErrors}>x</button>
-    </div>`
-  }
-
-  function colorPicker () {
-    function colorButton (c) {
-      return hx`<div
-        style="width: 20px; height: 20px;
-        background-color:${c};
-        ${ state.colorChoice === c  ?  "border: 2px solid #eee;" : "" }
-      "
-      onclick=${() => api.setColorChoice(c)}>
-      </div>`
-    }
-    return hx`<div>
-      ${colors.map(colorButton)}
-    </div>`
-  }
-
-  function join () {
-    return hx`<div>
-    <button onclick=${api.join}
-            ${state.joining ? 'disabled' : ''}>
-      join</button>
-    ${colorPicker()}
-    <input id="focusedInput"
-           onchange=${api.setPseudoInput}
-           value=${state.pseudoInput}>
-    </div>`
-  }
-
-  function input () {
-    return hx`<div>
-    <button onclick=${api.sendMessageInput}
-            ${state.sendingMessageInput ? 'disabled' : ''}>
-      send</button>
-    <input id="focusedInput"
-           onchange=${api.setMessageInput}
-           value=${state.messageInput}>
-  </div>`
-  }
-
-  function currentlyOnline () {
-    let users = Object.keys(state.online)
-        .map(function (user) {
-          return hx`<div
-           style="color: ${state.online[user]};">
-            ${user}
-          </div>`
-        })
-    return hx`<div>Online: ${users}</div>`
-  }
-
-  function loading () {
-    return hx`<div>loading...</div>`
-  }
-
-  function message (m) {
-    return hx`<div
+function message (m) {
+  return hx`<div
                  style="display: flex;"
 >
 <div
@@ -89,13 +26,90 @@ function render (api, state) {
   <div> ${m.message} </div>
 </div>
 </div>`
-  }
+}
 
-  function messages () {
-    let displayedMessages = state.messages.map(message)
-    return hx`<div>
+function render (api, state) {
+
+  /*
+    Error stuff
+    */
+
+  let errorLis = state.errors.map(e => hx`<li>${e}</li>`)
+
+  let errors =
+  hx`<div>
+      <ul>${errorLis}</ul>
+      <button onclick=${api.clearErrors}>x</button>
+  </div>`
+
+
+  /* Doodads & utils */
+  let users = Object.keys(state.online)
+      .map(function (user) {
+        return hx`<div
+           style="color: ${state.online[user]};">
+            ${user}
+          </div>`
+      })
+
+  let currentlyOnline =
+      hx`<div>Online: ${users}</div>`
+
+  let loading =
+      hx`<div>loading...</div>`
+
+
+  /*
+    Join room stuff
+    */
+
+  function colorButton (c) {
+    return hx`<div
+        style="width: 20px; height: 20px;
+        background-color:${c};
+        ${ state.colorChoice === c  ?  "border: 2px solid #eee;" : "" }
+      "
+      onclick=${() => api.setColorChoice(c)}>
+      </div>`
+  }
+  let colorPicker =
+      hx`<div>
+      ${colors.map(colorButton)}
+    </div>`
+
+  let join =
+  hx`<div>
+    <button onclick=${api.join}
+            ${(state.joining || !state.connected) ? 'disabled' : ''}>
+      join</button>
+    ${colorPicker}
+    <input id="focusedInput"
+           onchange=${api.setPseudoInput}
+           value=${state.pseudoInput}>
+  </div>`
+
+
+  /*
+    Room view stuff
+    */
+
+  let input =
+  hx`<div>
+    <button onclick=${api.sendMessageInput}
+            ${(state.sendingMessageInput || !state.connected) ? 'disabled' : ''}>
+      send</button>
+    <input id="focusedInput"
+           onchange=${api.setMessageInput}
+           value=${state.messageInput}>
+  </div>`
+
+
+  let displayedMessages = state.messages.map(message)
+
+  let messages =
+    hx`<div>
 ${ state.messagesLoading ?
-  loading()
+  loading
   :
   state.messages.length ?
     displayedMessages
@@ -103,28 +117,32 @@ ${ state.messagesLoading ?
     "No messages!"
 }
 </div>`
-  }
 
-  function leaveRoom () {
-    return hx`<button
+  let leaveRoom =
+    hx`<button
        onclick=${api.leave}
-       ${state.leavingRoom ? 'disabled' : ''}>
+       ${(state.leavingRoom || !state.connected) ? 'disabled' : ''}>
     >leave room</button>`
-  }
 
-  function room () {
-    return hx`<div>
-      ${leaveRoom()}
-      ${input()}
-      ${messages()}
+  let room =
+    hx`<div>
+      ${leaveRoom}
+      ${input}
+      ${messages}
     </div>`
-  }
+
+
+  let offlineNotice =
+    hx`<div>
+      Currently offline. Reconnecting.....
+    </div>`
 
   return hx`<div>
     <h1>my great webapp</h1>
-    ${ state.errors.length ? errors() : '' }
-    ${ currentlyOnline() }
-    ${ state.currentUser ? room() : join() }
+    ${ !state.connected ? offlineNotice : "" }
+    ${ state.errors.length ? errors : '' }
+    ${ currentlyOnline }
+    ${ state.currentUser ? room : join }
   </div>`
 }
 

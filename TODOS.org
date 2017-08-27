@@ -95,46 +95,49 @@ CLOSED: [2017-08-27 Sun 13:21]
 CLOSED: [2017-08-27 Sun 13:21]
 * UI Details
 
-immediate issues
-  `false` shows up as an error
-  .
+.
+  . . .
 
 details
   enter sends message
+  dates should be "ago"
   loading spinner
   spinner on join, send buttons when waiting
-  cannot send/join unless connected
-  dates should be "ago"
 
 css
  big white font
  big bar on top
  small gray sender / time
+
 * Nice-to-haves
-** Sanitize html (and test)
-** Hyperxify (if using hyperx)
-** Retry 'stateReducer' test
+** Safety
+*** Sanitize html (and test)
+*** Retry 'stateReducer' test
 # start with the initial state
 # after each actions, describe ONLY the expected updates
 # e.g., replace `state:` with `step:` or `reduceStep:`
-** Remember psuedonym in local storage
-# Load pseudonym from local storage, use to emit join message?
-** Embeddables
-*** Images
-*** Youtube videos
-*** Soundcloud
-** Performance tricks on pathological #s of posts
-** Unread status
-*** Thicker bar on unread messages
-** Favicon
-*** Online
-*** Offline
-*** Online & unread messages
-** Return errors from server `db.post` call
-** Validate stuff on the client-side
+*** Return errors from server `db.post` call
+*** Send/join disabled if !connected 
+** Performance
+*** Hyperxify (if using hyperx)
+*** Performance tricks on pathological #s of posts
+*** Validate stuff on the client-side
 # minidux can do this with createStore(reuder, initial, *enhancer*)
-*** Join attempts with bad stuff shouldn't need server
-*** Post attempts
+**** Join attempts with bad stuff shouldn't need server
+**** Post attempts
+** UI
+*** Embeddables
+**** Images
+**** Youtube videos
+**** Soundcloud
+*** Remember psuedonym in local storage
+# Load pseudonym from local storage, use to emit join message?
+*** Unread status
+**** Thicker bar on unread messages
+*** Favicon
+**** Online
+**** Offline
+**** Online & unread messages
 * Refactors
 ** DONE Make validator export error messages - import them from the tests
 CLOSED: [2017-08-26 Sat 22:11]
