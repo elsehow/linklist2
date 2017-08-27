@@ -127,25 +127,3 @@ ${ state.messagesLoading ?
     ${ state.currentUser ? room() : join() }
   </div>`
 }
-
-module.exports = render
-
-// text input //  . //  . //  . // errors //   . //   . //   . // join screen //   . //   . //   . //   . //   . // online users //   . // messages //   . //   ... //   . //   . //   . //       . //      . // leave chat too //  ... //   integration //    .
-
-// set it up for real...
-//   config
-//     routes
-//     dbs
-//   serv
-//   play, find bugs and notice
-
-// details
-//   enter sends message
-//   loading spinner
-//   spinner on join, send buttons when waiting
-//   cannot send/join unless connected
-
-// css
-//  big white font
-//  big bar on top
-//  small gray sender / time
