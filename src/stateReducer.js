@@ -4,6 +4,8 @@ const sortBy = require('lodash.sortby')
 const initialState = {
   online: {},
   errors: [],
+  pseudoInput: '',
+  colorChoice: null,
   messageInput: '',
   sendingMessageInput: false,
   connected: false,
@@ -74,6 +76,14 @@ function reducer (state=initialState, action) {
     state.messages = []
     state.currentUser = null
     return state
+  case 'set-pseudo-input':
+    console.log('setting pseudo input', action)
+    state.pseudoInput = action.text
+    return state
+  case 'set-color-choice':
+    console.log('setting color choice', action)
+    state.colorChoice = action.color
+    return state
   default:
     return state
   }
@@ -119,7 +129,10 @@ function createStateReducer (client) {
   // construct client API
   store.clientAPI = {
 
-    join: function (pseudo, color) {
+    join: function () {
+      let state = store.getState()
+      let color = state.colorChoice
+      let pseudo = state.pseudoInput
       // TODO Handle callback
       client.join(pseudo, color, function (res) {
         if (res)
@@ -176,6 +189,21 @@ function createStateReducer (client) {
     clearErrors: function () {
       store.dispatch({
         type: 'clear-errors',
+      })
+    },
+
+    setPseudoInput: function (ev) {
+      let text = event.target.value
+      store.dispatch({
+        type: 'set-pseudo-input',
+        text: text,
+      })
+    },
+
+    setColorChoice: function (color) {
+      store.dispatch({
+        type: 'set-color-choice',
+        color: color,
       })
     },
   }

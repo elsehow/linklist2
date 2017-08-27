@@ -83,7 +83,7 @@ mockClient.join = function (pseudo, color, cb) {
     }
     else
       cb()
-  }, 10)
+  }, 1000)
 }
 
 let counter = 0

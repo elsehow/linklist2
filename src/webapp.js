@@ -23,13 +23,15 @@ var loop = main(
 store.subscribe(loop.update)
 // put the loop on the page
 document.querySelector('#content').appendChild(loop.target)
-// bind enter key to send
-document.onkeypress = e => {
-  if (e.which == 13)
-    store.clientAPI.sendMessageInput()
-}
+// TODO // bind enter key to send
+// document.onkeypress = e => {
+//   if (e.which == 13)
+//     store.clientAPI.sendMessageInput()
+// }
 // set input box to focus
-document.getElementById("messageInput").focus()
+// (there will be at least ONE input box called
+//  `focusedInput` at any time)
+document.getElementById("focusedInput").focus()
 
 
 
