@@ -2,6 +2,7 @@ var hyperx = require('hyperx')
 var vdom = require('virtual-dom')
 var hyperx = require('hyperx')
 var hx = hyperx(vdom.h)
+var moment = require('moment')
 
 var colors = [
   '#a00',
@@ -10,6 +11,7 @@ var colors = [
 ]
 
 function message (m) {
+  let readableTime = moment(m.timestamp*1000).fromNow()
   return hx`<div
                  style="display: flex;"
 >
@@ -22,7 +24,7 @@ function message (m) {
 </div>
 <div style="flex-grow:1">
   <div> ${m.pseudo} </div>
-  <div> ${m.timestamp} </div>
+  <div> ${readableTime} </div>
   <div> ${m.message} </div>
 </div>
 </div>`

@@ -85,6 +85,7 @@ function post (io, client, db, messageBody, cb) {
   ]
   function serverCb () {
     db.post(message)
+      .catch(err => client.emit('error', err))
   }
   route(errorMsgs, serverCb, cb)
 }

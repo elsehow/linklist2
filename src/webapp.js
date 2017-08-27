@@ -34,6 +34,12 @@ const loop = main(
 // wire up events eventually
 // TODO
 store.subscribe(loop.update)
+// refresh the state every minute, to prompt any view changes
+// (for example, setting human-readable dates)
+setTimeout(
+  () => loop.update(store.getState()),
+  1000
+)
 // put the loop on the page
 document.querySelector('#content').appendChild(loop.target)
 

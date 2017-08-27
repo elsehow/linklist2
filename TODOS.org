@@ -100,7 +100,7 @@ CLOSED: [2017-08-27 Sun 13:21]
 
 details
   .
-  dates should be "ago"
+  .
   loading spinner
   spinner on join, send buttons when waiting
 
