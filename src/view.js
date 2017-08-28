@@ -8,6 +8,9 @@ var colors = [
   '#a00',
   '#0a0',
   '#00a',
+  '#aa0',
+  '#0aa',
+  '#aaa',
 ]
 
 function message (m) {
@@ -74,9 +77,9 @@ function render (api, state) {
   function colorButton (c) {
     return hx`<div
         class="color"
-        style="width: 20px; height: 20px;
-        background-color:${c};
-        ${ state.colorChoice === c  ?  "border: 2px solid #eee;" : "" }
+        style="background-color:${c};
+               position:relative;
+               ${ state.colorChoice === c  ?  "outline: 2px solid #eee; z-index:3000;" : "" }
       "
       onclick=${() => api.setColorChoice(c)}>
       </div>`
@@ -88,12 +91,17 @@ function render (api, state) {
 
   let join =
   hx`<div id="joinScreen">
-    <button onclick=${api.join}
-            ${(state.joining || !state.connected) ? 'disabled' : ''}>
-      join</button>
-    ${colorPicker}
-    <input oninput=${api.setPseudoInput}
-           value=${state.pseudoInput}>
+    <div class="upperRow">
+      ${colorPicker}
+      <input oninput=${api.setPseudoInput}
+             placeholder="Enter a pseudonym"
+             value=${state.pseudoInput}></input>
+    </div>
+    <div class="lowerRow">
+      <button onclick=${api.join}
+              ${(state.joining || !state.connected) ? 'disabled' : ''}>
+        join</button>
+    </div>
   </div>`
 
 
