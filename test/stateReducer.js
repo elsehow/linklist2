@@ -15,7 +15,7 @@ test('create new state reducer', t => {
   store = createStateReducer(mockClient)
   t.deepEquals(
     store.getState(),
-    mockClientStates[0].state,
+    mockClientStates[0].state(),
   )
   t.ok(store)
   t.end()
@@ -23,15 +23,20 @@ test('create new state reducer', t => {
 
 test('create new state reducer', t => {
   let i = 1 // mutable counter
+  let lastState = // mutable state reference
+      mockClientStates[0].state()
   // start at 1 - we already tested initial state, above
   // go through each state in order
   store.subscribe(function (state) {
-    t.deepEquals(
-      state,
-      mockClientStates[i].state,
-      'matches state ' + i
-    )
-    i+=1
+    if (i < mockClientStates.length) {
+      lastState = mockClientStates[i].state(lastState)
+      t.deepEquals(
+        state,
+        lastState,
+        'matches state ' + i
+      )
+      i+=1
+    }
   })
   // method to execute next action
   function next () {

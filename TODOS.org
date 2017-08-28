@@ -104,13 +104,14 @@ CLOSED: [2017-08-27 Sun 13:21]
   .
 
 
-css
- .
- .
- big bar on top
- small gray sender / time
-
-
+.
+ . . . .
+* Deployment
+** CouchDB? PouchDB? What's easier?
+** Connect  to db from local app
+** Deploy "as repo"
+*** Easiest way to serve static site?
+*** Easiest way to deploy/update?
 * Nice-to-haves
 ** Safety
 *** Sanitize html (and test)

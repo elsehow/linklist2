@@ -40,8 +40,6 @@ function reducer (state=initialState, action) {
     state.joining = true
     return state
   case 'attempt-join-success':
-    state.pseudoInput = ''
-    state.colorChoice = null
     state.joining = false
     state.currentUser = action.currentUser
     state.messagesLoading = true
@@ -61,8 +59,10 @@ function reducer (state=initialState, action) {
     state.messages = sort(docs(action.all.rows))
     return state
   case 'change':
-    if (state.currentUser)
-      state.messages = sort(state.messages.concat(action.change.docs))
+    if (state.currentUser) {
+      let allMessages = state.messages.concat(action.change.docs)
+      state.messages = sort(allMessages)
+    }
     return state
   case 'online':
     state.online = action.online
