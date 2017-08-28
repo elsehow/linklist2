@@ -100,11 +100,16 @@ CLOSED: [2017-08-27 Sun 13:21]
 
 .
   . .
+  group messages sent close together (reduce)
+  .
+
 
 css
- big white font
+ .
+ .
  big bar on top
  small gray sender / time
+
 
 * Nice-to-haves
 ** Safety

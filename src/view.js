@@ -12,22 +12,24 @@ var colors = [
 
 function message (m) {
   let readableTime = moment(m.timestamp*1000).fromNow()
-  return hx`<div
-                 style="display: flex;"
->
-<div
-  style="background-color: ${m.senderColor};
-         width: 5px;
-         align-items: stretch;
-         align-content: stretch;
-">
-</div>
-<div style="flex-grow:1">
-  <div> ${m.pseudo} </div>
-  <div> ${readableTime} </div>
-  <div> ${m.message} </div>
-</div>
-</div>`
+  return hx`<div class="message-container" style="display: flex;" >
+    <div
+      class="message-color-bar"
+      style="background-color: ${m.senderColor};
+             align-items: stretch;
+             align-content: stretch;">
+    </div>
+    <div class="message"
+        style="flex-grow:1">
+      <div class="message-meta">
+        <div> ${m.pseudo} </div>
+        <div> ${readableTime} </div>
+      </div>
+      <div class="message">
+        ${m.message}
+      </div>
+    </div>
+  </div>`
 }
 
 function render (api, state) {
@@ -39,9 +41,9 @@ function render (api, state) {
   let errorLis = state.errors.map(e => hx`<li>${e}</li>`)
 
   let errors =
-  hx`<div>
-      <ul>${errorLis}</ul>
+  hx`<div id="errors">
       <button onclick=${api.clearErrors}>x</button>
+      <ul>${errorLis}</ul>
   </div>`
 
 
@@ -49,16 +51,17 @@ function render (api, state) {
   let users = Object.keys(state.online)
       .map(function (user) {
         return hx`<div
-           style="color: ${state.online[user]};">
+           style="color: ${state.online[user]};"
+           class="online-user" >
             ${user}
           </div>`
       })
 
   let currentlyOnline =
       users.length ?
-        hx`<div>Online: ${users}</div>`
+        hx`<div id="onlineStatus">Online: ${users}</div>`
       :
-        hx`<div>No one currently online.</div>`
+        hx`<div id="onlineStatus">No one currently online.</div>`
 
   let loading =
       hx`<div>loading...</div>`
@@ -70,6 +73,7 @@ function render (api, state) {
 
   function colorButton (c) {
     return hx`<div
+        class="color"
         style="width: 20px; height: 20px;
         background-color:${c};
         ${ state.colorChoice === c  ?  "border: 2px solid #eee;" : "" }
@@ -78,12 +82,12 @@ function render (api, state) {
       </div>`
   }
   let colorPicker =
-      hx`<div>
+      hx`<div id="colorPicker">
       ${colors.map(colorButton)}
     </div>`
 
   let join =
-  hx`<div>
+  hx`<div id="joinScreen">
     <button onclick=${api.join}
             ${(state.joining || !state.connected) ? 'disabled' : ''}>
       join</button>
@@ -98,8 +102,9 @@ function render (api, state) {
     */
 
   let input =
-  hx`<div>
-    <button onclick=${api.sendMessageInput}
+  hx`<div id="messageInputControls">
+    <button id="submitMessageInputButton"
+            onclick=${api.sendMessageInput}
             ${(state.sendingMessageInput || !state.connected) ? 'disabled' : ''}>
       send</button>
     <input id="messageInput"
@@ -122,24 +127,27 @@ ${ state.messagesLoading ?
 }
 </div>`
 
-  let leaveRoom =
-    hx`<button
-       onclick=${api.leave}
-       ${(state.leavingRoom || !state.connected) ? 'disabled' : ''}>
-    >leave room</button>`
+
+  let offlineNotice =
+      hx`<div>
+      Currently offline. Reconnecting.....
+    </div>`
+
+  let roomStatus =
+    hx`<div class="roomStatus">
+      <button
+         onclick=${api.leave}
+         ${(state.leavingRoom || !state.connected) ? 'disabled' : ''}>
+      leave room
+      </button>
+    </div>`
 
   let room =
     hx`<div>
-      ${leaveRoom}
       ${input}
       ${messages}
     </div>`
 
-
-  let offlineNotice =
-    hx`<div>
-      Currently offline. Reconnecting.....
-    </div>`
 
   /*
     Set keybindings
@@ -173,7 +181,8 @@ ${ state.messagesLoading ?
   }, 300)
 
   return hx`<div>
-    ${ !state.connected ? offlineNotice : "" }
+    ${ !state.connected ? offlineNotice : '' }
+    ${ state.currentUser ? roomStatus : ''}
     ${ state.errors.length ? errors : '' }
     ${ currentlyOnline }
     ${ state.currentUser ? room : join }

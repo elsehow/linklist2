@@ -32,7 +32,9 @@ function reducer (state=initialState, action) {
     state.connected = true
     return state
   case 'disconnect':
+    state.online = {}
     state.connected = false
+    state.currentUser = null
     return state
   case 'attempt-join':
     state.joining = true
@@ -116,7 +118,7 @@ function createStateReducer (client) {
 
   // wire up client events
   client.on('ready', () => store.dispatch({ type: 'fetch-state' }))
-  client.on('connect', () => store.dispatch({ type: 'connect' }))
+  client.on('connect', () => {store.dispatch({ type: 'connect' })})
   client.on('disconnect', () => store.dispatch({ type: 'disconnect' }))
   client.on('error', dispatchErr)
   client.on('online', online => store.dispatch({ type: 'online', online: online }))

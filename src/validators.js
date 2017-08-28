@@ -3,7 +3,7 @@ const isHex = require('is-hex-color')
 const messages = {
 
   'HEX_INVALID': 'Not a valid hex color',
-  'HEX_NOT_STRING': 'Hex color must be a string',
+  'HEX_NOT_STRING': 'Please choose a color',
 
   'PSEUDO_BAD_LENGTH': 'Pseuodnym must be between 1 and 24 characters',
   'PSEDUO_NOT_STRING': 'Pseudonym must be a string',
