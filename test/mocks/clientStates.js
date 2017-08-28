@@ -155,7 +155,7 @@ module.exports = [
       lastState.messages = [
         { pseudo: 'ffff', timestamp: 1503792918,
           senderColor: '#a0a',
-          message: 'sup<br>hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
+          message: 'sup hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
       ]
       return lastState
     },
@@ -172,14 +172,14 @@ module.exports = [
         {
           "pseudo": "ffff",
           "timestamp": 1503793059,
-          "message": "hey<br>what it is",
+          "message": "hey what it is",
           "senderColor": '#00a',
           "_id": "a504259e-ecfc-483d-fb23-44c71125ded2",
           "_rev": "1-155f315264194403ab360a46ddeb54d7"
         },
         { pseudo: 'ffff', timestamp: 1503792918,
           senderColor: '#a0a',
-          message: 'sup<br>hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
+          message: 'sup hey', _id: 'e086b6a8-b4d9-4669-f09e-fcb65e5d39b4', _rev: '1-1cc2fbb2e9c543d0bd8f871acbdf73d3' },
       ]
       return lastState
     }

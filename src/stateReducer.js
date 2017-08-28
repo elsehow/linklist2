@@ -35,7 +35,10 @@ function partition (sortedDocs) {
       return acc.concat(cur)
     else if ((cur.pseudo == last(acc).pseudo)
              && ((last(acc).timestamp - cur.timestamp)   < threshold)) {
-      last(acc).message = cur.message + '<br>' + last(acc).message
+      // if the last one is already a list,
+      if (last(acc).message.length)
+        // concat to it
+        last(acc).message = cur.message + ' ' + last(acc).message
       return acc
     }
     return acc.concat(cur)
