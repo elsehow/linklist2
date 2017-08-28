@@ -26,6 +26,22 @@ function docs (rows) {
   })
 }
 
+let last = lst => lst[lst.length-1]
+
+function partition (sortedDocs) {
+  let threshold = 5 // some magic number to group by
+  return sortedDocs.reduce((acc, cur) => {
+    if (!acc.length)
+      return acc.concat(cur)
+    else if ((cur.pseudo == last(acc).pseudo)
+             && ((last(acc).timestamp - cur.timestamp)   < threshold)) {
+      last(acc).message = cur.message + '<br>' + last(acc).message
+      return acc
+    }
+    return acc.concat(cur)
+  }, [])
+}
+
 function reducer (state=initialState, action) {
   switch (action.type) {
   case 'connect':
@@ -56,12 +72,12 @@ function reducer (state=initialState, action) {
     return state
   case 'all-messages':
     state.messagesLoading = false
-    state.messages = sort(docs(action.all.rows))
+    state.messages = partition(sort(docs(action.all.rows)))
     return state
   case 'change':
     if (state.currentUser) {
       let allMessages = state.messages.concat(action.change.docs)
-      state.messages = sort(allMessages)
+      state.messages = partition(sort(allMessages))
     }
     return state
   case 'online':
