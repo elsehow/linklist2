@@ -1,14 +1,8 @@
-
-
 const test = require('tape')
 const linklist = require('..')
 
+const config = require('../conf.test.json')
 
-// test config
-const serverPort = 3030
-const serverUrl = 'http://localhost:'+serverPort
-const serverDbPath = 'http://localhost:5984/theirdb'
-const localDbName = 'testerdb'
 // we will assign these refs later
 let ioServer = null
 let client = null
@@ -17,14 +11,21 @@ let client3 = null
 
 
 test('can start server', t => {
-  ioServer = linklist.createServer(serverPort, serverDbPath)
+  ioServer = linklist.createServer(
+    config['masterDbPath'],
+    config['server']
+  )
   t.ok(ioServer)
   t.end()
 })
 
 
 test('can connect to server', t => {
-  client = linklist.createClient(serverUrl, localDbName, serverDbPath)
+  client = linklist.createClient(
+    config['client']['serverURL'],
+    config['client']['dbName'],
+    config['masterDbPath']
+  )
   client.on('connect', function () {
     t.ok(true, 'connected to server')
     t.end()
@@ -108,7 +109,10 @@ test('clients can join, leave rooms, receive online state', t => {
         'login 2, post-logout, one user online (ffff)'
       )
       // try joining and disconnecting
-      client3 = linklist.createClient(serverUrl, localDbName+'3', serverDbPath)
+      client3 = linklist.createClient(
+        config['client']['serverURL'],
+        config['client']['dbName']+'3',
+        config['masterDbPath'])
       client3.join('aaaa', '#aaa', function (res) {})
       login+=1
     } else if (login == 3) {
@@ -143,7 +147,11 @@ test('clients can join, leave rooms, receive online state', t => {
     )
   })
 
-  client2 = linklist.createClient(serverUrl, localDbName+'2', serverDbPath)
+  client2 = linklist.createClient(
+    config['client']['serverURL'],
+    config['client']['dbName']+'2',
+    config['masterDbPath']
+  )
   client2.join('ffff', '#eee', function (res) {
     t.deepEquals(
       res,

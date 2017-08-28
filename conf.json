@@ -1,10 +1,14 @@
 {
-  "masterDb": "http://localhost:5984/serverDb",
+  "masterDbPath": "http://localhost:5984/serverdb",
   "server": {
-    "port": 3000
+    "port": 3030,
+    "auth": {
+      "username": "youradminusername",
+      "password": "youradminpass"
+    }
   },
   "client": {
-    "serverURL": "http://localhost:3000",
+    "serverURL": "http://localhost:3030",
     "dbName": "localdb"
   }
 }

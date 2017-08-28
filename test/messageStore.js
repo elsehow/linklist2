@@ -1,8 +1,7 @@
 const test = require('tape')
 const moment = require('moment')
 
-const localDbName = 'mydb'
-const serverDbPath = 'http://localhost:5984/theirremotedb'
+const config = require('../conf.test.json')
 // mutable reference (gets assigned during tests)
 let serverDb = null
 let store = null
@@ -19,7 +18,10 @@ const exampleMessage = {
 }
 
 test('can create a server message store', t => {
-  serverDb = messageStore.createServerMessageStore(serverDbPath)
+  serverDb = messageStore.createServerMessageStore(
+    config['masterDbPath'],
+    config['server']['auth']
+  )
   t.ok(serverDb)
   t.ok(serverDb.post)
   serverDb.post(exampleMessage)
@@ -35,7 +37,10 @@ test('can create a server message store', t => {
 
 test('can create a client message store', t => {
   // create a client db
-  store = messageStore.createClientMessageStore(localDbName, serverDbPath)
+  store = messageStore.createClientMessageStore(
+    config['client']['dbName'],
+    config['masterDbPath']
+  )
   t.ok(store.db)
   t.ok(store.sync)
   // catch errors from the sync

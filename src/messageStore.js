@@ -29,8 +29,8 @@ function createClientMessageStore (name, remoteHost) {
 }
 
 
-function createServerMessageStore (name) {
-  const db = new PouchDB(name)
+function createServerMessageStore (name, auth) {
+  const db = new PouchDB(name, { auth: auth })
   return db
 }
 

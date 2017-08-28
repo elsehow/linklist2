@@ -96,11 +96,11 @@ function post (io, client, db, messageBody, cb) {
   This gets exposed to callers.
   */
 
-function createServer (port, dbHost) {
+function createServer (dbHost, config) {
 
   const serv = require('http').createServer();
   const io = socket(serv)
-  const db = messageStore.createServerMessageStore(dbHost)
+  const db = messageStore.createServerMessageStore(dbHost, config['auth'])
 
   // upon connection
   io.on('connection', client => {
@@ -118,7 +118,7 @@ function createServer (port, dbHost) {
     db.close()
   }
 
-  serv.listen(port)
+  serv.listen(config['port'])
   return serv
 }
 

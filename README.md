@@ -21,6 +21,11 @@ to run the tests,
 
 now you can edit js files in src/ and test/ - tests will automatically re-run
 
+## deploying
+
+1. configure [couchdb with an admin account](http://docs.couchdb.org/en/1.6.1/intro/security.html#authentication)
+2. 
+
 ## license
 
 BSD
