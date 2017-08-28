@@ -7,7 +7,7 @@ const linklist = require('..')
 // test config
 const serverPort = 3030
 const serverUrl = 'http://localhost:'+serverPort
-const serverDbPath = 'http://localhost:5984/theirDb'
+const serverDbPath = 'http://localhost:5984/theirdb'
 const localDbName = 'testerdb'
 // we will assign these refs later
 let ioServer = null

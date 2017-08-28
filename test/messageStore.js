@@ -2,7 +2,7 @@ const test = require('tape')
 const moment = require('moment')
 
 const localDbName = 'mydb'
-const serverDbPath = 'http://localhost:5984/theirRemoteDb'
+const serverDbPath = 'http://localhost:5984/theirremotedb'
 // mutable reference (gets assigned during tests)
 let serverDb = null
 let store = null
