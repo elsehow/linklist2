@@ -3,12 +3,14 @@
   "license": "BSD-3-Clause",
   "main": "src/index.js",
   "scripts": {
-    "build-webapp": "watchify -vd -p browserify-hmr src/webapp.js -o dist/bundle.js",
+    "build-webapp": "browserify src/webapp.js -o dist/bundle.js",
+    "watch-webapp": "watchify -vd -p browserify-hmr src/webapp.js -o dist/bundle.js",
     "serve-webapp": "ecstatic --port 9999 dist",
     "test": "tape test/index.js | tap-spec",
     "watch": "runwatch \"**/*.js\" -r \"npm test\""
   },
   "devDependencies": {
+    "browserify": "^14.4.0",
     "browserify-hmr": "^0.3.5",
     "ecstatic": "^2.2.1",
     "runwatch": "^0.1.3",
