@@ -1,0 +1,155 @@
+/* gradient background */
+html {
+    min-height:100%; background: #39804a; /* Old browsers */ background: -moz-linear-gradient(top, #39804a 0%, #193746 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#39804a), color-stop(100%,#193746)); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(top, #39804a 0%,#193746 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top, #39804a 0%,#193746 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(top, #39804a 0%,#193746 100%); /* IE10+ */ background: linear-gradient(to bottom, #39804a 0%,#193746 100%); /* W3C */ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#39804a', endColorstr='#193746',GradientType=0 ); /* IE6-9 */
+     }
+
+body {
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+input {
+    height: 100%;
+    font-size:30pt;
+    color:#333;
+    background-color:#fefefe;
+    border:none;
+}
+
+/*
+
+~~~~~~~~~~~~~~
+MESSAGES
+~~~~~~~~~~~~~~
+
+div structure:
+
+  [message-container
+    [message-color-bar]
+    [message
+      [message-meta]
+      [message-body]]]
+
+*/
+
+.message-container {
+    padding:5px;
+}
+
+.message-color-bar {
+    width: 3px;
+}
+
+.message {
+  padding-left: 5px;
+}
+
+.message-meta {
+    font-size:8pt;
+    color: #ddd;
+}
+
+
+/*
+~~~~~~~~~~~~~~
+MESSAGE INPUT CONTROLS
+~~~~~~~~~~~~~~
+
+[#messageInputControls
+  [#submitMessageInputButton]
+  [#messageInput]]
+*/
+
+#messageInputControls {
+  display:flex;
+  height:30pt;
+  width:100%;
+  padding:0.1em;
+}
+
+
+#submitMessageInputButton {
+    height:100%;
+}
+
+#messageInput {
+  flex-grow: 1;
+}
+
+
+/*
+/*
+~~~~~~~~~~~~~~
+USERS CURRENTLY ONLINE
+~~~~~~~~~~~~~~
+
+[#onlineStatus
+  [.onlineUser]
+  [.onlineUser]
+  [.onlineUser]]
+*/
+
+#onlineStatus {}
+
+.online-user {
+    float:right;
+}
+
+/*
+ROOM STATUS
+*/
+
+.roomStatus {}
+
+/*
+JOIN SCREEN
+
+[#joinScreen
+  [.upperRow
+    [#colorPicker [.color] [.color] [.color]]
+    [input]]
+  [.lowerRow
+    [button]]]
+*/
+
+#joinScreen {
+}
+
+#colorPicker {
+  width:60pt;
+}
+
+.color {
+  float:left;
+  width: 15pt;
+  height: 15pt;
+  padding:2px;
+}
+
+.upperRow {
+
+}
+.lowerRow button {
+  height:20px;
+}
+
+/*
+ERRORS
+*/
+
+#errors {
+  display:flex;
+  background-color: red;
+  font-size:12pt;
+}
+
+#errors ul {
+  list-style:none;
+}
+#errors button {
+  background:red;
+  border: 2px solid white;
+  color:white;
+  float:left;
+}
