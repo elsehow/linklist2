@@ -1,23 +1,17 @@
 const vdom = require('virtual-dom')
 const main = require('main-loop')
 const partial = require('lodash.partial')
-const config = require('../conf.json')
+const config = require('../conf.test.json')
 
-// TODO HACK import mock states
-// const mockStates = require('../test/mocks/clientStates').map(s => s.state)
-// TODO mock client for now
-// const client = require('../test/mocks/client')
-
-const createClient = require('.').createClient
+const createClient = require('./client')
 
 const client = createClient(
   config['client']['serverURL'],
   config['client']['dbName'],
-  config['masterDb'],
+  config['masterDbPath'],
 )
 
-const store = require('.')
-      .createStateReducer(client)
+const store = require('./stateReducer')(client)
 
 // setup page
 const render = partial(
@@ -27,12 +21,9 @@ const render = partial(
 
 const loop = main(
   store.getState(),
-  // HACK mock
-  // mockStates[10],
   render, vdom)
 
-// wire up events eventually
-// TODO
+// wire up events
 store.subscribe(loop.update)
 // refresh the state every minute, to prompt any view changes
 // (for example, setting human-readable dates)

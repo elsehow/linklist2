@@ -1,3 +1,6 @@
+const path = require('path')
+const express = require('express')
+const fs = require('fs')
 const validators = require('./validators')
 const socket = require('socket.io')
 const partial = require('lodash.partial')
@@ -98,7 +101,9 @@ function post (io, client, db, messageBody, cb) {
 
 function createServer (dbHost, config) {
 
-  const serv = require('http').createServer();
+  const app = express()
+  const serv = require('http').createServer(app)
+  // const serv = require('http').createServer()
   const io = socket(serv)
   const db = messageStore.createServerMessageStore(dbHost, config['auth'])
 
@@ -117,6 +122,12 @@ function createServer (dbHost, config) {
     serv.close()
     db.close()
   }
+
+  app.use(express.static('dist/'))
+
+  // serv.on('request', function(request, response) {
+  //   fs.createReadStream('dist/index.html').pipe(response)
+  // })
 
   serv.listen(config['port'])
   return serv
