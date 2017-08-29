@@ -1,7 +1,7 @@
 const vdom = require('virtual-dom')
 const main = require('main-loop')
 const partial = require('lodash.partial')
-const config = require('../conf.test.json')
+const config = require('../conf.prod.json')
 
 const createClient = require('./client')
 

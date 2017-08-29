@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const linklist = require('.')
-const config = require('./conf.test.json')
+const config = require('./conf.prod.json')
 const ioServer = linklist.createServer(
   config['masterDbPath'],
   config['server']
